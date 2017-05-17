@@ -1,0 +1,5 @@
+E:\לימודים\שנה ב\סמסטר ב\C#\CSharp_Homework\tests\tests\obj\Debug\tests.csprojResolveAssemblyReference.cache
+E:\לימודים\שנה ב\סמסטר ב\C#\CSharp_Homework\tests\tests\bin\Debug\tests.exe
+E:\לימודים\שנה ב\סמסטר ב\C#\CSharp_Homework\tests\tests\bin\Debug\tests.pdb
+E:\לימודים\שנה ב\סמסטר ב\C#\CSharp_Homework\tests\tests\obj\Debug\tests.exe
+E:\לימודים\שנה ב\סמסטר ב\C#\CSharp_Homework\tests\tests\obj\Debug\tests.pdb
