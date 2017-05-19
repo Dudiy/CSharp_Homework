@@ -9,6 +9,7 @@ namespace B17_Ex02_Program
         public static void Main()
         {
             Console.WriteLine("this is a test");
+            Console.WriteLine("this is another test");
         }
     }
 }
