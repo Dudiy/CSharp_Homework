@@ -1,0 +1,6 @@
+C:\Dudi\לימודים\שנה ב\סמסטר ב\C#\CSharp_Project2\B17 Ex02 Dudi 200441749 Or 204311997\B17_Ex02_Program\obj\Debug\B17_Ex02_Program.csprojResolveAssemblyReference.cache
+C:\Dudi\לימודים\שנה ב\סמסטר ב\C#\CSharp_Project2\B17 Ex02 Dudi 200441749 Or 204311997\B17_Ex02_Program\bin\Debug\B17_Ex02_Program.exe
+C:\Dudi\לימודים\שנה ב\סמסטר ב\C#\CSharp_Project2\B17 Ex02 Dudi 200441749 Or 204311997\B17_Ex02_Program\bin\Debug\B17_Ex02_Program.pdb
+C:\Dudi\לימודים\שנה ב\סמסטר ב\C#\CSharp_Project2\B17 Ex02 Dudi 200441749 Or 204311997\B17_Ex02_Program\bin\Debug\Ex02.ConsoleUtils.dll
+C:\Dudi\לימודים\שנה ב\סמסטר ב\C#\CSharp_Project2\B17 Ex02 Dudi 200441749 Or 204311997\B17_Ex02_Program\obj\Debug\B17_Ex02_Program.exe
+C:\Dudi\לימודים\שנה ב\סמסטר ב\C#\CSharp_Project2\B17 Ex02 Dudi 200441749 Or 204311997\B17_Ex02_Program\obj\Debug\B17_Ex02_Program.pdb

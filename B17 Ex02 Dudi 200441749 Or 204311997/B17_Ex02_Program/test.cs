@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace B17_Ex02_Program
+{
+    class test
+    {
+        public static void Main()
+        {
+            Console.WriteLine("this is a test");
+        }
+    }
+}
