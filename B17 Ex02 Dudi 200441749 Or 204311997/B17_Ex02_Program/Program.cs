@@ -6,6 +6,5 @@ namespace B17_Ex02_Program
 {
     class Program
     {
-        Screen
     }
 }
