@@ -11,6 +11,10 @@ namespace B17_Ex02_Program
             Console.WriteLine("this is a test");
             Console.WriteLine("this is another test");
             // asdsad sa as
+            Console.WriteLine("this is a test");            //test
+            Console.WriteLine("this is another test");            
+            dasdsad
+
         }
     }
 }
