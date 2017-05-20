@@ -88,7 +88,7 @@ namespace B17_Ex02
             if (i_Sequence.Length != k_LengthOfSequence)        //check length of sequence
             {
                 isValid = false;
-                validationResultString = "length of sequence is invalid";
+                validationResultString = "Length of sequence is invalid";
             }
             else
             {
@@ -97,7 +97,7 @@ namespace B17_Ex02
                     if (ch < 'a' || Char.ToLower(k_MaxLetterInSequence) > ch &&
                         ch < 'A' && k_MaxLetterInSequence > ch)
                     {
-                        validationResultString = String.Format("Invalid sequence, please use upper/lower case letters between 'A' and '{0}':", k_MaxLetterInSequence);
+                        validationResultString = String.Format("Only upper/lower case letters between 'A' and '{0}' are valid", k_MaxLetterInSequence);
                         break;
                     }
                 }

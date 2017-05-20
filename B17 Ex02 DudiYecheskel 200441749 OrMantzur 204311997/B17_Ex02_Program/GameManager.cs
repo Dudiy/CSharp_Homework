@@ -12,14 +12,14 @@ namespace B17_Ex02
         private List<Round> m_RoundsOfGame = new List<Round>();
         private char m_borderChar = '|';                        // TODO change
         private int m_maxWordLenWithSpace = 2 * LetterSequence.LengthOfSequence - 1;
-        
+
         public void Start()
         {
             getMaxRoundNumFromUser();
             printBoard();
             run();
         }
-        
+
         private void getMaxRoundNumFromUser()
         {
             bool endOfInput = false;
@@ -68,7 +68,7 @@ namespace B17_Ex02
 
             rowString.Append(m_borderChar);
             rowString.Append(' ');
-            rowString.Append(pinsPrintFormat.PadRight(2* LetterSequence.LengthOfSequence));
+            rowString.Append(pinsPrintFormat.PadRight(2 * LetterSequence.LengthOfSequence));
             rowString.Append(m_borderChar);
             rowString.Append(resultPrintFormat.PadRight(2 * LetterSequence.LengthOfSequence - 1));
             rowString.Append(m_borderChar);
@@ -86,7 +86,7 @@ namespace B17_Ex02
             }
 
             // remove the last space in separateWithSpaceString
-            if(separateWithSpaceString.Length != 0)
+            if (separateWithSpaceString.Length != 0)
             {
                 separateWithSpaceString.Remove(separateWithSpaceString.Length - 1, 1);
             }
@@ -123,6 +123,60 @@ namespace B17_Ex02
         }
 
         private void run()
+        {
+            Round currentRound;
+            LetterSequence userInput;
+            bool playerWon = false;
+
+            for (int i = 0; i < m_maxRoundNum; i++)
+            {
+                userInput = getInputFromUser();
+                currentRound = new Round(userInput);
+                playerWon = currentRound.PlayRound(m_ComputerSequence);
+                m_RoundsOfGame.Add(currentRound);
+                Ex02.ConsoleUtils.Screen.Clear();
+                if (playerWon)
+                {
+                    printWinningScreen();
+                }                   
+                else
+                {
+                    printBoard();
+                }
+            }
+            printLosingScreen();
+        }
+
+        private LetterSequence getInputFromUser()
+        {
+            string userInputStr = Console.ReadLine();
+            string validationResult;
+
+            while (!LetterSequence.IsValidSequence(userInputStr, out validationResult))
+            {
+                if (userInputStr.Equals("Q"))
+                {
+                    quitGame();
+                }
+
+                Console.WriteLine("{0} Try again:");
+                userInputStr = Console.ReadLine();
+            }
+
+            return new LetterSequence(validationResult);
+        }
+
+        private void printWinningScreen()
+        {
+
+        }
+
+        private void printLosingScreen()
+        {
+
+        }
+
+        private void quitGame()
         {
 
         }
