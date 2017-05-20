@@ -10,7 +10,11 @@ namespace B17_Ex02
         {
             GameManager game = new GameManager();
 
-            Console.WriteLine("World");
+            Console.WriteLine("sfd");
+
+
+
+
             game.Start();
 
         }
