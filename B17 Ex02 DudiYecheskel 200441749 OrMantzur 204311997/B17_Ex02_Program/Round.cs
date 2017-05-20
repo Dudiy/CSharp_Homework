@@ -9,9 +9,10 @@ namespace B17_Ex02
         private string m_Result = String.Empty;
         private LetterSequence m_Sequence;
 
-        public Round(LetterSequence i_Sequence)
+        public Round(string i_Sequence)
         {
-            m_Sequence = i_Sequence;           
+            m_Sequence = new LetterSequence(i_Sequence);
+            // TODO compute guesses
         }
     }
 }

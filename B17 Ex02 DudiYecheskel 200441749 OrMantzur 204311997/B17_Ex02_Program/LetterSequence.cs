@@ -43,6 +43,7 @@ namespace B17_Ex02
             {
                 foreach (char ch in i_Sequence)
                 {
+                    // TODO change to ">=" and "<="
                     if ('a' > ch && ch < Char.ToLower(k_MaxLetterInSequence) ||
                         'A' > ch && ch < k_MaxLetterInSequence)
                     {
@@ -66,10 +67,13 @@ namespace B17_Ex02
             byte correctLetterWrongPositionCounter = 0;
             byte currentIndex = 0;
 
+            // TODO the order that foreach scan is the order of the string ? 
+            // maybe for make sure 
+            // if (m_Sequence.IndexOf(ch) == i_CompareTo.m_Sequence.IndexOf(ch))
             foreach (char ch in m_Sequence)
             {
                 if (i_CompareTo.m_Sequence.Contains(ch.ToString()))         //if the computer's sequence has the current letter
-                {
+                { 
                     if (currentIndex == i_CompareTo.m_Sequence.IndexOf(ch))        //if the index in the computer's sequence is the same as the current letter's
                     {
                         correctGuessCounter++;
