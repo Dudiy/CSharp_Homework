@@ -16,7 +16,24 @@ namespace B17_Ex02
 
         public string Result
         {
-            get { return m_Result; }
+            get
+            {
+                if (m_Result.Equals(String.Empty))
+                {
+                    //TODO throw error??                    
+                }
+                return m_Result;
+            }
+        }
+
+        public Round(LetterSequence i_Sequence)
+        {
+            m_Sequence = i_Sequence;            
+        }
+
+        public void playRound(LetterSequence i_ComputerSequence)
+        {
+            m_Result = m_Sequence.Compare(i_ComputerSequence);
         }
     }
 }
