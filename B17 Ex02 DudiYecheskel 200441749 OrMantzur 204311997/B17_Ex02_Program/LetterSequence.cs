@@ -35,7 +35,11 @@ namespace B17_Ex02
                 //Throw execption;
             }
 
-            m_Sequence = i_Sequence.ToUpper();
+        public LetterSequence(string i_Sequence)
+        {
+            //valid =   sequence of exactly "k_LengthOfSequence" letters, upper or lower case letters between 'A' and "k_MaxLetterInSequence"
+            //          same letter can appear more than once
+            bool isValidSequence = false;
 
             /*
             while (i_Sequence.Length != k_LengthOfSequence)

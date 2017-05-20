@@ -6,13 +6,17 @@ namespace B17_Ex02
 {
     class Round
     {
-        private string m_Result = String.Empty;
         private LetterSequence m_Sequence;
+        private string m_Result = String.Empty;
 
-        public Round(string i_Sequence)
+        public string Sequence
         {
-            m_Sequence = new LetterSequence(i_Sequence);
-            // TODO compute guesses
+            get { return m_Sequence.SequenceString; }
+        }
+
+        public string Result
+        {
+            get { return m_Result; }
         }
     }
 }
