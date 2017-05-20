@@ -6,9 +6,10 @@ namespace B17_Ex02
 {
     class LetterSequence
     {
-        public const char k_MaxLetterInSequence = 'H';
-        public const byte k_LengthOfSequence = 4;           //this value must be less than or equal to (k_MaxLetterInSequence-'A')
+        private const char k_MaxLetterInSequence = 'H';
+        private const byte k_LengthOfSequence = 4;           //this value must be less than or equal to (k_MaxLetterInSequence-'A')
         private string m_Sequence = String.Empty;
+        private int i = 3;
 
         public LetterSequence()
         {
@@ -24,6 +25,11 @@ namespace B17_Ex02
 
                 m_Sequence = String.Concat(m_Sequence, tempChar);
             }
+        }
+
+        public byte LengthOfSequence
+        {
+            get { return k_LengthOfSequence; }
         }
 
         public LetterSequence(string i_Sequence)
@@ -73,7 +79,7 @@ namespace B17_Ex02
             foreach (char ch in m_Sequence)
             {
                 if (i_CompareTo.m_Sequence.Contains(ch.ToString()))         //if the computer's sequence has the current letter
-                { 
+                {
                     if (currentIndex == i_CompareTo.m_Sequence.IndexOf(ch))        //if the index in the computer's sequence is the same as the current letter's
                     {
                         correctGuessCounter++;
