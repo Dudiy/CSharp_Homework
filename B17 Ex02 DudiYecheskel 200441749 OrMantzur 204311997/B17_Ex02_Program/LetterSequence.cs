@@ -30,16 +30,12 @@ namespace B17_Ex02
         {
             m_Sequence = i_Sequence.Replace(" ", "");
 
-            if (!IsValidSequence(i_Sequence,out string dummy))
+            if (!IsValidSequence(i_Sequence, out string dummy))
             {
                 //Throw execption;
             }
 
-        public LetterSequence(string i_Sequence)
-        {
-            //valid =   sequence of exactly "k_LengthOfSequence" letters, upper or lower case letters between 'A' and "k_MaxLetterInSequence"
-            //          same letter can appear more than once
-            bool isValidSequence = false;
+            m_Sequence = i_Sequence.ToUpper();
 
             /*
             while (i_Sequence.Length != k_LengthOfSequence)
@@ -93,7 +89,7 @@ namespace B17_Ex02
                 validationResultString = "length of sequence is invalid";
             }
             else
-            {                                                   
+            {
                 foreach (char ch in i_Sequence)                 //check letters of sequence
                 {
                     if (ch < 'a' || Char.ToLower(k_MaxLetterInSequence) > ch &&
