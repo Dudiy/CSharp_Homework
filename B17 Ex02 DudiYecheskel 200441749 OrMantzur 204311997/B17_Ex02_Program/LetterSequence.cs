@@ -64,12 +64,28 @@ namespace B17_Ex02
             StringBuilder result = new StringBuilder();
             byte correctGuessCounter = 0;
             byte correctLetterWrongPositionCounter = 0;
+            byte currentIndex = 0;
 
+            foreach (char ch in m_Sequence)
+            {
+                if (i_CompareTo.m_Sequence.Contains(ch.ToString()))         //if the computer's sequence has the current letter
+                {
+                    if (currentIndex == i_CompareTo.m_Sequence.IndexOf(ch))        //if the index in the computer's sequence is the same as the current letter's
+                    {
+                        correctGuessCounter++;
+                    }
+                    else
+                    {
+                        correctLetterWrongPositionCounter++;
+                    }
+                }
 
+                currentIndex++;
+            }
 
             result.Capacity = correctGuessCounter + correctLetterWrongPositionCounter;
-            result.Append('V',correctGuessCounter);
-            result.Append('X',correctLetterWrongPositionCounter);
+            result.Append('V', correctGuessCounter);
+            result.Append('X', correctLetterWrongPositionCounter);
 
             return result.ToString();
         }
