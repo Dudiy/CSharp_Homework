@@ -30,7 +30,7 @@ namespace B17_Ex02
         {
             //valid =   sequence of exactly "k_LengthOfSequence" letters, upper or lower case letters between 'A' and "k_MaxLetterInSequence"
             //          same letter can appear more than once
-            bool isValidSequence = false;                   
+            bool isValidSequence = false;
 
             while (i_Sequence.Length != k_LengthOfSequence)
             {
@@ -57,6 +57,21 @@ namespace B17_Ex02
             }
 
             m_Sequence = i_Sequence;
+        }
+
+        public string Compare(LetterSequence i_CompareTo)
+        {
+            StringBuilder result = new StringBuilder();
+            byte correctGuessCounter = 0;
+            byte correctLetterWrongPositionCounter = 0;
+
+
+
+            result.Capacity = correctGuessCounter + correctLetterWrongPositionCounter;
+            result.Append('V',correctGuessCounter);
+            result.Append('X',correctLetterWrongPositionCounter);
+
+            return result.ToString();
         }
     }
 }
