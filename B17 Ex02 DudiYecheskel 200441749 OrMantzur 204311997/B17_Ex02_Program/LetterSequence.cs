@@ -75,14 +75,16 @@ namespace B17_Ex02
             get { return k_LengthOfSequence; }
         }
 
+        //checks if a given string is a valid sequence. o_validationString = the string without spaces if the string is valid, else returns why the string is not valid
         public static bool IsValidSequence(string i_Sequence, out string o_validationString)
         {
             //valid =   sequence of exactly "k_LengthOfSequence" letters, upper or lower case letters between 'A' and "k_MaxLetterInSequence"
             //          same letter can appear more than once.
             bool isValid = true;
-            string validationResultString = "The input is valid";
+            string validationResultString = String.Empty;
 
             i_Sequence = i_Sequence.Replace(" ", "");           //remove all spaces in the input string
+            validationResultString = i_Sequence;
             if (i_Sequence.Length != k_LengthOfSequence)        //check length of sequence
             {
                 isValid = false;
