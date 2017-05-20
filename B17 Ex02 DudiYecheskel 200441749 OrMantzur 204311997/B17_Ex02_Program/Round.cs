@@ -11,7 +11,7 @@ namespace B17_Ex02
 
         public string Sequence
         {
-            get { return m_Sequence.SequenceString; }
+            get { return m_Sequence.SequenceStr; }
         }
 
         public string Result

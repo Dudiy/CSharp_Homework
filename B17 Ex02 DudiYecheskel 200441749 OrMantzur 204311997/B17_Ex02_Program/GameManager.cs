@@ -117,6 +117,11 @@ namespace B17_Ex02
             }
         }
 
+        private void printSeparateRow()
+        {
+
+        }
+
         private void run()
         {
 
