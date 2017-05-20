@@ -93,5 +93,10 @@ namespace B17_Ex02
 
             return result.ToString();
         }
+
+        public void Print()
+        {
+            Console.Write(m_Sequence);
+        }
     }
 }
