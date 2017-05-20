@@ -27,9 +27,14 @@ namespace B17_Ex02
             }
         }
 
-        public byte LengthOfSequence
+        public static byte LengthOfSequence
         {
             get { return k_LengthOfSequence; }
+        }
+
+        public string SequenceString
+        {
+            get { return m_Sequence; }
         }
 
         public LetterSequence(string i_Sequence)

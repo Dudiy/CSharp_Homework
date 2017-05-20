@@ -11,12 +11,13 @@ namespace B17_Ex02
         private int m_maxRoundNum;                              // TODO change to "int?"
         private List<Round> m_RoundsOfGame = new List<Round>();
         private char m_borderChar = '|';                        // TODO change
-        private int m_maxWordLenWithSpace = 2 * LetterSequence.k_LengthOfSequence - 1;
-
+        private int m_maxWordLenWithSpace = 2 * LetterSequence.LengthOfSequence - 1;
+        
         public void Start()
         {
             getMaxRoundNumFromUser();
             printBoard();
+            run();
         }
         
         private void getMaxRoundNumFromUser()
@@ -67,9 +68,9 @@ namespace B17_Ex02
 
             rowString.Append(m_borderChar);
             rowString.Append(' ');
-            rowString.Append(pinsPrintFormat.PadRight(2* LetterSequence.k_LengthOfSequence));
+            rowString.Append(pinsPrintFormat.PadRight(2* LetterSequence.LengthOfSequence));
             rowString.Append(m_borderChar);
-            rowString.Append(resultPrintFormat.PadRight(2 * LetterSequence.k_LengthOfSequence - 1));
+            rowString.Append(resultPrintFormat.PadRight(2 * LetterSequence.LengthOfSequence - 1));
             rowString.Append(m_borderChar);
             Console.WriteLine(rowString);
         }
@@ -96,23 +97,29 @@ namespace B17_Ex02
         private void printRounds()
         {
             // second line in table
-            string firstPinsValue = new string('#', LetterSequence.k_LengthOfSequence);
+            string firstPinsValue = new string('#', LetterSequence.LengthOfSequence);
             printRow(firstPinsValue, string.Empty);
 
             // continue of table
+            string pinsString = string.Empty;
+            string resultString = string.Empty;
+
             for (int i = 0; i < m_maxRoundNum; i++)
             {
                 // the (i+1) round is already occurred
                 if (i < m_RoundsOfGame.Count)
                 {
-                    // TODO print the round
+                    pinsString = m_RoundsOfGame[i].Sequence;
+                    resultString = m_RoundsOfGame[i].Result;
                 }
-                else
-                {
-                    // print empty row
-                    printRow(string.Empty, string.Empty);
-                }
+
+                printRow(string.Empty, string.Empty);
             }
+        }
+
+        private void run()
+        {
+
         }
     }
 }
