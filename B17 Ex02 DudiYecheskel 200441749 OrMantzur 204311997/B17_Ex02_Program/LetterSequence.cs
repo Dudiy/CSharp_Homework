@@ -65,6 +65,11 @@ namespace B17_Ex02
             */
         }
 
+        public string SequenceStr
+        {
+            get { return m_Sequence; }
+        }
+
         public static byte LengthOfSequence
         {
             get { return k_LengthOfSequence; }
@@ -73,7 +78,7 @@ namespace B17_Ex02
         public static bool IsValidSequence(string i_Sequence, out string o_validationString)
         {
             //valid =   sequence of exactly "k_LengthOfSequence" letters, upper or lower case letters between 'A' and "k_MaxLetterInSequence"
-            //          same letter can appear more than once
+            //          same letter can appear more than once.
             bool isValid = true;
             string validationResultString = "The input is valid";
 
