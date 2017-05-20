@@ -3,3 +3,8 @@ C:\Or\Semester B\C#\Git\CSharp_Project2\B17 Ex02 DudiYecheskel 200441749 OrMantz
 C:\Or\Semester B\C#\Git\CSharp_Project2\B17 Ex02 DudiYecheskel 200441749 OrMantzur 204311997\B17_Ex02_Program\obj\Debug\B17_Ex02.csprojResolveAssemblyReference.cache
 C:\Or\Semester B\C#\Git\CSharp_Project2\B17 Ex02 DudiYecheskel 200441749 OrMantzur 204311997\B17_Ex02_Program\obj\Debug\B17_Ex02_Program.exe
 C:\Or\Semester B\C#\Git\CSharp_Project2\B17 Ex02 DudiYecheskel 200441749 OrMantzur 204311997\B17_Ex02_Program\obj\Debug\B17_Ex02_Program.pdb
+E:\לימודים\שנה ב\סמסטר ב\C#\CSharp_Project2\B17 Ex02 DudiYecheskel 200441749 OrMantzur 204311997\B17_Ex02_Program\bin\Debug\B17_Ex02_Program.exe
+E:\לימודים\שנה ב\סמסטר ב\C#\CSharp_Project2\B17 Ex02 DudiYecheskel 200441749 OrMantzur 204311997\B17_Ex02_Program\bin\Debug\B17_Ex02_Program.pdb
+E:\לימודים\שנה ב\סמסטר ב\C#\CSharp_Project2\B17 Ex02 DudiYecheskel 200441749 OrMantzur 204311997\B17_Ex02_Program\obj\Debug\B17_Ex02.csprojResolveAssemblyReference.cache
+E:\לימודים\שנה ב\סמסטר ב\C#\CSharp_Project2\B17 Ex02 DudiYecheskel 200441749 OrMantzur 204311997\B17_Ex02_Program\obj\Debug\B17_Ex02_Program.exe
+E:\לימודים\שנה ב\סמסטר ב\C#\CSharp_Project2\B17 Ex02 DudiYecheskel 200441749 OrMantzur 204311997\B17_Ex02_Program\obj\Debug\B17_Ex02_Program.pdb
