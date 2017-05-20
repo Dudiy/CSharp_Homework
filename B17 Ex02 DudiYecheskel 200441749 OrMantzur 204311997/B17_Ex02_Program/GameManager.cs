@@ -10,7 +10,7 @@ namespace B17_Ex02
         private LetterSequence m_ComputerSequence = new LetterSequence();
         private int m_maxRoundNum;                              // TODO change to "int?"
         private List<Round> m_RoundsOfGame = new List<Round>();
-        private char m_borderChar = '|';                        // TODO change
+        private char m_borderChar = '|';                     // TODO change 124 221
         private int m_maxWordLenWithSpace = 2 * LetterSequence.LengthOfSequence - 1;
         
         public void Start()
@@ -56,6 +56,7 @@ namespace B17_Ex02
             rowTitleString.Append("Result:".PadRight(m_maxWordLenWithSpace));
             rowTitleString.Append(m_borderChar);
             Console.WriteLine(rowTitleString);
+            printSeparateRow();
             // continue of table
             printRounds();
         }
@@ -99,6 +100,7 @@ namespace B17_Ex02
             // second line in table
             string firstPinsValue = new string('#', LetterSequence.LengthOfSequence);
             printRow(firstPinsValue, string.Empty);
+            printSeparateRow();
 
             // continue of table
             string pinsString = string.Empty;
@@ -114,17 +116,42 @@ namespace B17_Ex02
                 }
 
                 printRow(string.Empty, string.Empty);
+                printSeparateRow();
             }
         }
 
         private void printSeparateRow()
         {
+            StringBuilder separateRow = new StringBuilder();
 
+            // Pins column
+            separateRow.Append(m_borderChar);
+            separateRow.Append(new string('=', m_maxWordLenWithSpace + 2)); // 2 for space near border
+            // Result column
+            separateRow.Append(m_borderChar);
+            separateRow.Append(new string('=', m_maxWordLenWithSpace));
+            separateRow.Append(m_borderChar);
+            Console.WriteLine(separateRow);
         }
 
         private void run()
         {
+            
+        }
+
+        private void printWinningScreen()
+        {
+            Console.WriteLine("No more guesses allowed. You lose.");
+            Console.WriteLine("The sequence is: {0}", m_ComputerSequence.SequenceStr);
+            Console.WriteLine("Would you like to start a new game? <Y/N>");
 
         }
+
+        //private void startNewGame()
+        //{
+        //    Ex02.ConsoleUtils.Screen.Clear();
+        //    getMaxRoundNumFromUser();
+        //    printBoard();
+        //}
     }
 }
