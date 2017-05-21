@@ -43,7 +43,7 @@ namespace B17_Ex02
 
         public bool IsWinRound()
         {
-            return m_winRound;
+            return m_winRound;          //TODO change to m_playerWon and use getter?
         }
     }
 }

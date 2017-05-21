@@ -35,7 +35,7 @@ namespace B17_Ex02
                 //Throw execption;
             }
 
-            m_Sequence = i_Sequence.ToUpper();
+            m_Sequence = m_Sequence.ToUpper();
 
             /*
             while (i_Sequence.Length != k_LengthOfSequence)
@@ -88,7 +88,7 @@ namespace B17_Ex02
             if (i_Sequence.Length != k_LengthOfSequence)        //check length of sequence
             {
                 isValid = false;
-                validationResultString = "Length of sequence is invalid";
+                validationResultString = String.Format("Length of sequence must be {0} letters long.",k_LengthOfSequence);
             }
             else
             {

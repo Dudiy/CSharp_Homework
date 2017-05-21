@@ -8,14 +8,14 @@ namespace B17_Ex02
     class GameManager
     {
         private LetterSequence m_ComputerSequence = new LetterSequence();
-        private int m_maxRoundNum;                              // TODO change to "int?"
+        private int m_maxRoundNum;                          // TODO change to "int?"
         private List<Round> m_RoundsOfGame = new List<Round>();
         private int m_currRoundNum = 1;
-        private char m_borderChar = '|';                     // TODO change 124 221
+        private char m_borderChar = '|';                    // TODO change 124 221
         private int m_maxWordLenWithSpace = 2 * LetterSequence.LengthOfSequence - 1;
         private bool m_runGameFlag = true;
 
-        public void Start()
+        public void Start()                                 //TODO maybe change to ctor?
         {
             getMaxRoundNumFromUser();
             Ex02.ConsoleUtils.Screen.Clear();
@@ -27,8 +27,7 @@ namespace B17_Ex02
         {
             bool endOfInput = false;
 
-            Console.Write("Please enter max number of guesses: ");
-            Console.WriteLine();
+            Console.WriteLine("Please enter max number of guesses: ");
             while (!endOfInput)
             {
                 string maxRoundNumInput = Console.ReadLine();
@@ -146,7 +145,7 @@ namespace B17_Ex02
             Round currentRound;
             string userInput;
 
-            while(checkRunGameFlag())
+            while(checkRunGameFlag())           //TODO why not while(m_runGameFlag && m_currRoundNum <= m_maxRoundNum)
             {
                 userInput = getInputFromUser();
                 // sequence input
@@ -259,7 +258,7 @@ namespace B17_Ex02
             Ex02.ConsoleUtils.Screen.Clear();
             m_ComputerSequence = new LetterSequence();
             getMaxRoundNumFromUser();
-            m_RoundsOfGame = new List<Round>();
+            m_RoundsOfGame = new List<Round>();       //TODO why not m_RoundsOfGame.Clear()
             m_currRoundNum = 1;
             Ex02.ConsoleUtils.Screen.Clear();
             printBoard();
