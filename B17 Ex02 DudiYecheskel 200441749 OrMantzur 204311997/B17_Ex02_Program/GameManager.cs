@@ -10,12 +10,15 @@ namespace B17_Ex02
         private LetterSequence m_ComputerSequence = new LetterSequence();
         private int m_maxRoundNum;                              // TODO change to "int?"
         private List<Round> m_RoundsOfGame = new List<Round>();
+        private int m_currRoundNum = 1;
         private char m_borderChar = '|';                     // TODO change 124 221
         private int m_maxWordLenWithSpace = 2 * LetterSequence.LengthOfSequence - 1;
+        private bool m_runGameFlag = true;
 
         public void Start()
         {
             getMaxRoundNumFromUser();
+            Ex02.ConsoleUtils.Screen.Clear();
             printBoard();
             run();
         }
@@ -114,8 +117,12 @@ namespace B17_Ex02
                     pinsString = m_RoundsOfGame[i].Sequence;
                     resultString = m_RoundsOfGame[i].Result;
                 }
+                else
+                {
+                    pinsString = resultString = string.Empty;
+                }
 
-                printRow(string.Empty, string.Empty);
+                printRow(pinsString, resultString);
                 printSeparateRow();
             }
         }
@@ -137,70 +144,131 @@ namespace B17_Ex02
         private void run()
         {
             Round currentRound;
-            LetterSequence userInput;
-            bool playerWon = false;
+            string userInput;
 
-            for (int i = 0; i < m_maxRoundNum; i++)
+            while(checkRunGameFlag())
             {
                 userInput = getInputFromUser();
-                currentRound = new Round(userInput);
-                playerWon = currentRound.PlayRound(m_ComputerSequence);
-                m_RoundsOfGame.Add(currentRound);
-                Ex02.ConsoleUtils.Screen.Clear();
-                if (playerWon)
+                // sequence input
+                if(!userInput.ToUpper().Equals("Q"))
                 {
-                    printWinningScreen();
-                }                   
+                    currentRound = new Round(userInput);
+                    currentRound.PlayRound(m_ComputerSequence);
+                    m_RoundsOfGame.Add(currentRound);
+                    Ex02.ConsoleUtils.Screen.Clear();
+                    printBoard();
+                    if (currentRound.IsWinRound())
+                    {
+                        winGame();
+                    }
+                }
+                // quit input
                 else
                 {
-                    printBoard();
+                    endGame();
                 }
+                
             }
-            printLosingScreen();
+            loseGame();
         }
 
-        private LetterSequence getInputFromUser()
+        private bool checkRunGameFlag()
         {
-            string userInputStr = Console.ReadLine();
+            return (m_runGameFlag && m_currRoundNum <= m_maxRoundNum);
+        }
+
+        // return valid input: valid sequence or "Q"
+        private string getInputFromUser()
+        {
+            string userInput = string.Empty;
             string validationResult;
+            bool endOfInput = false;
 
-            while (!LetterSequence.IsValidSequence(userInputStr, out validationResult))
+            while (!endOfInput)
             {
-                if (userInputStr.Equals("Q"))
+                Console.WriteLine("Please type your next guess <A B C D> or 'Q' to quit");
+                userInput = Console.ReadLine();
+                // check if input: valid sequence or "Q"
+                if (LetterSequence.IsValidSequence(userInput, out validationResult) ||
+                    userInput.ToUpper().Equals("Q"))
                 {
-                    quitGame();
+                    endOfInput = true;
                 }
-
-                Console.WriteLine("{0} Try again:");
-                userInputStr = Console.ReadLine();
+                // invalid input, print the kind of error
+                else
+                {
+                    Console.WriteLine("{0} Try again:", validationResult);
+                }
             }
 
-            return new LetterSequence(validationResult);
+            return userInput;
         }
 
-        private void printLosingScreen()
+        private void winGame()
         {
-
+            Console.WriteLine("You guessed after {0} steps!", m_currRoundNum);
+            userActionIfRestartGame();
         }
 
-        private void quitGame()
-        {
-
-        }
-
-        private void printWinningScreen()
+        private void loseGame()
         {
             Console.WriteLine("No more guesses allowed. You lose.");
             Console.WriteLine("The sequence is: {0}", m_ComputerSequence.SequenceStr);
-            Console.WriteLine("Would you like to start a new game? <Y/N>");
-
+            checkIfRestartGame();
         }
 
-        //private void startNewGame()
-        //{
-        //    Ex02.ConsoleUtils.Screen.Clear();
-        //    getMaxRoundNumFromUser();
-        //    printBoard();
-        //}
+        private void userActionIfRestartGame()
+        {
+            if (checkIfRestartGame())
+            {
+                startNewGame();
+            }
+            else
+            {
+                endGame();
+            }
+        }
+
+        private bool checkIfRestartGame()
+        {
+            string userInput = string.Empty;
+            bool endOfInput = false;
+            bool isRestartGame=false;               // TODO nullable ?
+
+            Console.WriteLine("Would you like to start a new game? <Y/N>");
+            userInput = Console.ReadLine();
+            while(!endOfInput)
+            {
+                isRestartGame = userInput.ToUpper().Equals("Y");
+                if (!isRestartGame && !userInput.ToUpper().Equals("N"))
+                {
+                    Console.WriteLine("Error: insert Y/N");
+                    userInput = Console.ReadLine();
+                }
+                else
+                {
+                    endOfInput = true;
+                }
+            }
+
+            return isRestartGame;
+        }
+
+        private void startNewGame()
+        {
+            Ex02.ConsoleUtils.Screen.Clear();
+            m_ComputerSequence = new LetterSequence();
+            getMaxRoundNumFromUser();
+            m_RoundsOfGame = new List<Round>();
+            m_currRoundNum = 1;
+            Ex02.ConsoleUtils.Screen.Clear();
+            printBoard();
+        }
+
+        private void endGame()
+        {
+            Console.WriteLine("The game ended.");
+            m_runGameFlag = false;
+        }
     }
 }

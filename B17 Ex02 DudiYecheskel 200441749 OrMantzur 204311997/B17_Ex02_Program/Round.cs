@@ -8,6 +8,12 @@ namespace B17_Ex02
     {
         private LetterSequence m_Sequence;
         private string m_Result = String.Empty;
+        private bool m_winRound = false;
+
+        public Round(string i_SequenceStr)
+        {
+            m_Sequence = new LetterSequence(i_SequenceStr);
+        }
 
         public string Sequence
         {
@@ -25,19 +31,19 @@ namespace B17_Ex02
                 return m_Result;
             }
         }
-
-        public Round(LetterSequence i_Sequence)
-        {
-            m_Sequence = i_Sequence;
-        }
-
+        
         // updates the value of result, returns true if the guess is correct
-        public bool PlayRound(LetterSequence i_ComputerSequence)
+        public void PlayRound(LetterSequence i_ComputerSequence)
         {
             m_Result = m_Sequence.Compare(i_ComputerSequence);
-            
-            //return true if the player won: length of result is the same as the sequence and there are no 'X' chars
-            return (m_Result.Length == LetterSequence.LengthOfSequence && !m_Result.Contains("X"));     
+
+            // win round if: length of result is the same as the sequence and there are no 'X' chars
+            m_winRound = (m_Result.Length == LetterSequence.LengthOfSequence && !m_Result.Contains("X"));     
+        }
+
+        public bool IsWinRound()
+        {
+            return m_winRound;
         }
     }
 }
