@@ -32,37 +32,10 @@ namespace B17_Ex02
 
             if (!IsValidSequence(i_Sequence, out string dummy))
             {
-                //Throw execption;
+                //TODO Throw execption;
             }
 
-            m_Sequence = m_Sequence.ToUpper();
-
-            /*
-            while (i_Sequence.Length != k_LengthOfSequence)
-            {
-                //TODO throw execption?
-                Console.WriteLine("The sequence given is too long, please try again: ");
-                i_Sequence = Console.ReadLine();
-            }
-
-            while (!isValidSequence)
-            {
-                foreach (char ch in i_Sequence)
-                {
-                    // TODO change to ">=" and "<="
-                    if ('a' > ch && ch < Char.ToLower(k_MaxLetterInSequence) ||
-                        'A' > ch && ch < k_MaxLetterInSequence)
-                    {
-                        isValidSequence = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid sequence, please use upper/lower case letters between 'A' and '{0}':", k_MaxLetterInSequence);
-                        i_Sequence = Console.ReadLine();
-                    }
-                }
-            }
-            */
+            m_Sequence = m_Sequence.ToUpper();            
         }
 
         public string SequenceStr
@@ -88,16 +61,17 @@ namespace B17_Ex02
             if (i_Sequence.Length != k_LengthOfSequence)        //check length of sequence
             {
                 isValid = false;
-                validationResultString = String.Format("Length of sequence must be {0} letters long.",k_LengthOfSequence);
+                validationResultString = String.Format("Length of sequence must be {0} letters long.", k_LengthOfSequence);
             }
             else
             {
                 foreach (char ch in i_Sequence)                 //check letters of sequence
                 {
-                    if (ch < 'a' || Char.ToLower(k_MaxLetterInSequence) > ch &&
-                        ch < 'A' && k_MaxLetterInSequence > ch)
+                    if (!('a' <= ch && ch <= Char.ToLower(k_MaxLetterInSequence) ||
+                          'A' <= ch && ch <= k_MaxLetterInSequence))
                     {
                         validationResultString = String.Format("Only upper/lower case letters between 'A' and '{0}' are valid", k_MaxLetterInSequence);
+                        isValid = false;
                         break;
                     }
                 }
