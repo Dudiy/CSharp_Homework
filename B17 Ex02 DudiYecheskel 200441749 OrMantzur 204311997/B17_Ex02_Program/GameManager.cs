@@ -7,12 +7,14 @@ namespace B17_Ex02
 {
     class GameManager
     {
-        private byte m_MaxNumOfGuesses = 4;                 //initialized to a valid number
+        private const byte k_minNumOfGuesses = 4;
+        private const byte k_maxNumOfGuesses = 10;
+        private byte m_maxNumOfGuessesFromPlayer = 4;                 //initialized to a valid number
         private byte m_currRoundNum = 1;
         private byte m_maxWordLenWithSpaces = (byte)(2 * LetterSequence.LengthOfSequence - 1);
         private bool m_runGameFlag = true;
-        private LetterSequence m_ComputerSequence = new LetterSequence();   //empty ctor generates a random sequence
-        private List<Round> m_RoundsPlayed = new List<Round>();
+        private LetterSequence m_computerSequence = new LetterSequence();   //empty ctor generates a random sequence
+        private List<Round> m_roundsPlayed = new List<Round>();
 
         public GameManager()                                 //TODO changed from "start" to ctor
         {
@@ -32,8 +34,8 @@ namespace B17_Ex02
 
             Console.WriteLine("Please input max number of guesses:");
             userInput = Console.ReadLine();
-            isValidInput = byte.TryParse(userInput, out m_MaxNumOfGuesses);
-            while (!isValidInput || m_MaxNumOfGuesses < 4 || m_MaxNumOfGuesses > 10)
+            isValidInput = byte.TryParse(userInput, out m_maxNumOfGuessesFromPlayer);
+            while (!isValidInput || m_maxNumOfGuessesFromPlayer < k_minNumOfGuesses || m_maxNumOfGuessesFromPlayer > k_maxNumOfGuesses)
             {
                 if (!isValidInput)
                 {
@@ -44,17 +46,16 @@ namespace B17_Ex02
                     Console.Write("The number is out of range, please input a number between 4 and 10: ");
                 }
                 userInput = Console.ReadLine();
-                isValidInput = byte.TryParse(userInput, out m_MaxNumOfGuesses);
+                isValidInput = byte.TryParse(userInput, out m_maxNumOfGuessesFromPlayer);
             }
         }
 
         private void printBoard()
         {
-            // main title
             Console.WriteLine("Current board status:");
-            //print the title row and the first row
+            // print the title row and the first row
             printFirstTwoRows();
-            // continue of table
+            // print the rest of the table
             printRounds();
         }
 
@@ -96,13 +97,13 @@ namespace B17_Ex02
             string pinsString = string.Empty;
             string resultString = string.Empty;
 
-            for (int i = 0; i < m_MaxNumOfGuesses; i++)
+            for (int i = 0; i < m_maxNumOfGuessesFromPlayer; i++)
             {
                 // the (i+1) round has already occurred
-                if (i < m_RoundsPlayed.Count)
+                if (i < m_roundsPlayed.Count)
                 {
-                    pinsString = m_RoundsPlayed[i].Sequence;
-                    resultString = m_RoundsPlayed[i].Result;
+                    pinsString = m_roundsPlayed[i].Sequence;
+                    resultString = m_roundsPlayed[i].Result;
                 }
                 else
                 {
@@ -154,15 +155,15 @@ namespace B17_Ex02
             Round currentRound;
             string userInput;
 
-            while (m_runGameFlag && m_currRoundNum <= m_MaxNumOfGuesses)           //TODO why not while(m_runGameFlag && m_currRoundNum <= m_maxRoundNum)
+            while (m_runGameFlag && m_currRoundNum <= m_maxNumOfGuessesFromPlayer)           //TODO why not while(m_runGameFlag && m_currRoundNum <= m_maxRoundNum)
             {
                 userInput = getInputFromUser();
                 // sequence input
                 if (!userInput.ToUpper().Equals("Q"))
                 {
                     currentRound = new Round(userInput);
-                    currentRound.PlayRound(m_ComputerSequence);
-                    m_RoundsPlayed.Add(currentRound);
+                    currentRound.PlayRound(m_computerSequence);
+                    m_roundsPlayed.Add(currentRound);
                     m_currRoundNum++;
                     Ex02.ConsoleUtils.Screen.Clear();
                     printBoard();
@@ -210,14 +211,14 @@ namespace B17_Ex02
 
         private void winGame()
         {
-            Console.WriteLine("You guessed after {0} steps!", m_currRoundNum);
+            Console.WriteLine("You guessed after {0} steps!", m_currRoundNum-1);
             promptUserForRestart();
         }
 
         private void loseGame()
         {
-            Console.WriteLine("Game Over - No more guesses allowed.");
-            Console.WriteLine("The correct sequence is: {0}", m_ComputerSequence.SequenceStr);
+            Console.WriteLine("No more guesses allowed. You Lost.");
+            Console.WriteLine("The correct sequence is: {0}", m_computerSequence.SequenceStr);
             promptUserForRestart();
         }
 
@@ -252,8 +253,8 @@ namespace B17_Ex02
         {
             Ex02.ConsoleUtils.Screen.Clear();
             getMaxNumOfGuessesFromUser();
-            m_ComputerSequence = new LetterSequence();
-            m_RoundsPlayed = new List<Round>();       //TODO why not m_RoundsOfGame.Clear()
+            m_computerSequence = new LetterSequence();
+            m_roundsPlayed = new List<Round>();       //TODO why not m_RoundsOfGame.Clear()
             m_currRoundNum = 1;
             Ex02.ConsoleUtils.Screen.Clear();
             printBoard();
