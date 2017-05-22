@@ -49,7 +49,7 @@ namespace B17_Ex02
         }
 
         //checks if a given string is a valid sequence. o_validationString = the string without spaces if the string is valid, else returns why the string is not valid
-        public static bool IsValidSequence(string i_Sequence, out string o_validationString)
+        public static bool IsValidSequence(string i_Sequence, out string o_ValidationString)
         {
             //valid =   sequence of exactly "k_LengthOfSequence" letters, upper or lower case letters between 'A' and "k_MaxLetterInSequence"
             //          same letter can appear more than once.
@@ -60,7 +60,7 @@ namespace B17_Ex02
             validationResultString = i_Sequence;
             if (i_Sequence.Length != k_LengthOfSequence)        //check length of sequence
             {
-                isValid = false;
+                isValid = false;                
                 validationResultString = String.Format("Length of sequence must be {0} letters long.", k_LengthOfSequence);
             }
             else
@@ -77,7 +77,7 @@ namespace B17_Ex02
                 }
             }
 
-            o_validationString = validationResultString;
+            o_ValidationString = validationResultString;
             return isValid;
         }
 
@@ -88,9 +88,6 @@ namespace B17_Ex02
             byte correctLetterWrongPositionCounter = 0;
             byte currentIndex = 0;
 
-            // TODO the order that foreach scan is the order of the string ? 
-            // maybe for make sure 
-            // if (m_Sequence.IndexOf(ch) == i_CompareTo.m_Sequence.IndexOf(ch))
             foreach (char ch in m_Sequence)
             {
                 if (i_CompareTo.m_Sequence.Contains(ch.ToString()))         //if the computer's sequence has the current letter

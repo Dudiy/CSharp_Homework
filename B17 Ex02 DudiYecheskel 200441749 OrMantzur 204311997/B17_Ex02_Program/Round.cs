@@ -8,7 +8,7 @@ namespace B17_Ex02
     {
         private LetterSequence m_Sequence;
         private string m_Result = String.Empty;
-        private bool m_winRound = false;
+        private bool m_WinRound = false;
 
         public Round(string i_SequenceStr)
         {
@@ -38,12 +38,12 @@ namespace B17_Ex02
             m_Result = m_Sequence.Compare(i_ComputerSequence);
 
             // win round if: length of result is the same as the sequence and there are no 'X' chars
-            m_winRound = (m_Result.Length == LetterSequence.LengthOfSequence && !m_Result.Contains("X"));     
+            m_WinRound = (m_Result.Length == LetterSequence.LengthOfSequence && !m_Result.Contains("X"));     
         }
 
         public bool IsWinRound()
         {
-            return m_winRound;          //TODO change to m_playerWon and use getter?
+            return m_WinRound;          //TODO change to m_playerWon and use getter?
         }
     }
 }

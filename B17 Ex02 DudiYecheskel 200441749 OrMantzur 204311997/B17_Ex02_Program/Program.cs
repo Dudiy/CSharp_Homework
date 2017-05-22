@@ -8,6 +8,7 @@ namespace B17_Ex02
     {
         public static void Main()
         {
+            //TODO have only one call in main           
             GameManager game = new GameManager();
         }
     }
