@@ -40,11 +40,11 @@ namespace B17_Ex02
             {
                 if (!isValidInput)
                 {
-                    Console.Write("Invalid input, please input a number between {0} and {1}: ", k_MinNumOfGuesses, k_MaxNumOfGuesses);
+                    Console.WriteLine("Invalid input, please input a number between {0} and {1}: ", k_MinNumOfGuesses, k_MaxNumOfGuesses);
                 }
                 else
                 {
-                    Console.Write("The number is out of range, please input a number between 4 and 10: ");
+                    Console.WriteLine("The number is out of range, please input a number between 4 and 10: ");
                 }
                 userInput = Console.ReadLine();
                 isValidInput = byte.TryParse(userInput, out m_MaxNumOfGuessesFromPlayer);
@@ -153,34 +153,44 @@ namespace B17_Ex02
 
         private void run()
         {
+            while (m_RunGameFlag)   
+            {
+                if(m_CurrRoundNum <= m_MaxNumOfGuessesFromPlayer)
+                {
+                    playRound();
+                }
+                else
+                {
+                    loseGame();
+                }
+            }
+        }
+
+        private void playRound()
+        {
             Round currentRound;
             string userInput;
 
-            while (m_RunGameFlag && m_CurrRoundNum <= m_MaxNumOfGuessesFromPlayer)           //TODO why not while(m_runGameFlag && m_currRoundNum <= m_maxRoundNum)
+            userInput = getInputFromUser();
+            // sequence input
+            if (!userInput.ToUpper().Equals("Q"))
             {
-                userInput = getInputFromUser();
-                // sequence input
-                if (!userInput.ToUpper().Equals("Q"))
+                currentRound = new Round(userInput);
+                currentRound.PlayRound(m_ComputerSequence);
+                m_RoundsPlayed.Add(currentRound);
+                m_CurrRoundNum++;
+                Ex02.ConsoleUtils.Screen.Clear();
+                printBoard();
+                if (currentRound.IsWinRound())
                 {
-                    currentRound = new Round(userInput);
-                    currentRound.PlayRound(m_ComputerSequence);
-                    m_RoundsPlayed.Add(currentRound);
-                    m_CurrRoundNum++;
-                    Ex02.ConsoleUtils.Screen.Clear();
-                    printBoard();
-                    if (currentRound.IsWinRound())
-                    {
-                        winGame();
-                    }
+                    winGame();
                 }
-                // quit input
-                else
-                {
-                    endGame();
-                }
-
             }
-            loseGame();
+            // quit input
+            else
+            {
+                endGame();
+            }
         }
 
         // return valid input: valid sequence or "Q"

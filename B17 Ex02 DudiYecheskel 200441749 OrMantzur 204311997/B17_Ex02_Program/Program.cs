@@ -8,8 +8,15 @@ namespace B17_Ex02
     {
         public static void Main()
         {
-            //TODO have only one call in main           
+            runGame();
+        }
+
+        private static void runGame()
+        {         
             GameManager game = new GameManager();
+            // TODO maybe change to 
+            //GameManager game = new GameManager();
+            //game.Start();
         }
     }
 }
