@@ -8,15 +8,14 @@ namespace B17_Ex02
     {
         public static void Main()
         {
-            runGame();
+            runUI();
         }
+        
+        private static void runUI()
+        {
+            UI userInterface = new UI();
 
-        private static void runGame()
-        {         
-            GameManager game = new GameManager();
-            // TODO maybe change to 
-            //GameManager game = new GameManager();
-            //game.Start();
+            userInterface.StartNewGame();       //TODO is it ok to have 2 lines?
         }
     }
 }
