@@ -82,7 +82,7 @@ namespace B17_Ex02
             {
                 if (userInput.ToUpper().Equals("Y"))
                 {
-                    startNewGame();
+                    StartNewGame();
                     endOfInput = true;
                 }
                 else if (userInput.ToUpper().Equals("N"))
@@ -216,23 +216,21 @@ namespace B17_Ex02
         {
             while (currentGame.GameState.Equals(Game.eGameState.Running))
             {
-                switch (currentGame.GameState)
-                {
-                    case Game.eGameState.Running:
-                        playRound();
-                        continue;      //continue?
-                    case Game.eGameState.PlayerWon:
-                        winGame();
-                        continue;
-                    case Game.eGameState.PlayerLost:
-                        loseGame();
-                        continue;
-                    case Game.eGameState.GameEnded:
-                        promptUserForRestart();
-                        continue;
-                    default:
-                        break;
-                }
+                playRound();
+            }
+            switch (currentGame.GameState)
+            {
+                case Game.eGameState.PlayerWon:
+                    winGame();
+                    break;
+                case Game.eGameState.PlayerLost:
+                    loseGame();
+                    break;
+                case Game.eGameState.GameEnded:
+                    promptUserForRestart();
+                    break;
+                default:
+                    break;
             }
         }
 
