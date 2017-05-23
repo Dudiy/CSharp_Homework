@@ -264,3 +264,4 @@ __pycache__/
 *.pyc
 /B17 Ex02 DudiYecheskel 200441749 OrMantzur 204311997/B17_Ex02_Program/bin
 /B17 Ex02 DudiYecheskel 200441749 OrMantzur 204311997/B17_Ex02_Program/obj
+/.vs/CSharp_Project2/v15/*.suo

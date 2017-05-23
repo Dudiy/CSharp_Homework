@@ -4,10 +4,10 @@ using System.Text;
 
 namespace B17_Ex02
 {
-    class Round
+    public class Round
     {
         private LetterSequence m_Sequence;
-        private string m_Result = String.Empty;
+        private string m_Result = string.Empty;
         private bool m_WinRound = false;
 
         public Round(string i_SequenceStr)
@@ -24,10 +24,11 @@ namespace B17_Ex02
         {
             get
             {
-                if (m_Result.Equals(String.Empty))
+                if (m_Result.Equals(string.Empty))
                 {
-                    //TODO throw error??                    
+                    // TODO throw error??                    
                 }
+                 
                 return m_Result;
             }
         }
@@ -38,12 +39,12 @@ namespace B17_Ex02
             m_Result = m_Sequence.Compare(i_ComputerSequence);
 
             // win round if: length of result is the same as the sequence and there are no 'X' chars
-            m_WinRound = (m_Result.Length == LetterSequence.LengthOfSequence && !m_Result.Contains("X"));     
+            m_WinRound = m_Result.Length == LetterSequence.LengthOfSequence && !m_Result.Contains("X");     
         }
 
         public bool IsWinRound()
         {
-            return m_WinRound;          //TODO change to m_playerWon and use getter?
+            return m_WinRound;          // TODO change to m_playerWon and use getter?
         }
     }
 }

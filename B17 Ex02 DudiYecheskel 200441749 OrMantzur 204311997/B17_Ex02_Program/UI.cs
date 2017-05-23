@@ -4,18 +4,18 @@ using System.Text;
 
 namespace B17_Ex02
 {
-    class UI
+    public class UI
     {
-        private byte m_MaxWordLenWithSpaces = (byte)(2 * LetterSequence.LengthOfSequence - 1);
-        Game currentGame = null;
+        private byte m_MaxWordLenWithSpaces = (byte)((2 * LetterSequence.LengthOfSequence) - 1);
+        private Game currentGame = null;
 
-        //================================================ getting input from user ================================================
+        // ================================================ getting input from user ================================================
         private byte getMaxNumOfGuessesFromUser()
         {
-            string userInputStr = String.Empty;
+            string userInputStr = string.Empty;
             bool isValidInput = false;
             bool inputIsByte = false;
-            byte userInputByte = 0;         //TODO Important!!! should not be 0 how do we use nullable here?
+            byte userInputByte = 0;         // TODO Important!!! should not be 0 how do we use nullable here?
 
             while (!isValidInput)
             {
@@ -25,8 +25,7 @@ namespace B17_Ex02
                 {
                     Console.WriteLine("Invalid input, please try again.\n");
                 }
-
-                else if (!(Game.isValidNumOfGuesses(userInputByte)))
+                else if (!Game.isValidNumOfGuesses(userInputByte))
                 {
                     Console.WriteLine("The number is out of range, please input a number between 4 and 10.\n");
                 }
@@ -49,7 +48,7 @@ namespace B17_Ex02
             while (!endOfInput)
             {
                 Console.WriteLine("Please type your next guess <A B C D> or 'Q' to quit");
-                userInput = Console.ReadLine().Replace(" ", "").ToUpper();     //get the input - remove all spaces and set to uppercase letters
+                userInput = Console.ReadLine().Replace(" ", string.Empty).ToUpper();     // get the input - remove all spaces and set to uppercase letters
                 if (userInput.ToUpper().Equals("Q"))
                 {
                     endOfInput = true;
@@ -98,13 +97,15 @@ namespace B17_Ex02
             }
         }
 
-        //================================================ printing output to console ================================================
+        // ================================================ printing output to console ================================================
         private void printBoard()
         {
             Ex02.ConsoleUtils.Screen.Clear();
             Console.WriteLine("Current board status:");
+
             // print the title row and the first row
             printFirstTwoRows();
+
             // print the rest of the table
             printRounds();
         }
@@ -115,7 +116,7 @@ namespace B17_Ex02
             string hiddenComputerSequenceStr = new string('#', LetterSequence.LengthOfSequence);
 
             // first line in table
-            //rowTitleString.Append(m_verticalBorderChar);
+            // rowTitleString.Append(m_verticalBorderChar);
             rowTitleString.Append('║');
             rowTitleString.Append("Pins:".PadRight(m_MaxWordLenWithSpaces + 2)); // 2 for space near border
             rowTitleString.Append('║');
@@ -123,6 +124,7 @@ namespace B17_Ex02
             rowTitleString.Append('║');
             Console.WriteLine(rowTitleString);
             printRowSeperator();
+
             // second line in table
             printRow(hiddenComputerSequenceStr, string.Empty);
             printRowSeperator();
@@ -175,12 +177,12 @@ namespace B17_Ex02
             rowString.Append(' ');
             rowString.Append(formattedPinsStr.PadRight(2 * LetterSequence.LengthOfSequence));
             rowString.Append('║');
-            rowString.Append(formattedResultStr.PadRight(2 * LetterSequence.LengthOfSequence - 1));
+            rowString.Append(formattedResultStr.PadRight((2 * LetterSequence.LengthOfSequence) - 1));
             rowString.Append('║');
             Console.WriteLine(rowString);
         }
 
-        //gets a string, and adds a space between every two chars
+        // gets a string, and adds a space between every two chars
         private string separateLettersStringWithSpaces(string i_Str)
         {
             StringBuilder outputStr = new StringBuilder();
@@ -200,7 +202,7 @@ namespace B17_Ex02
             return outputStr.ToString();
         }
 
-        //================================================ IO<->Game methods ================================================
+        // ================================================ IO<->Game methods ================================================
         public void StartNewGame()
         {
             Ex02.ConsoleUtils.Screen.Clear();
@@ -218,6 +220,7 @@ namespace B17_Ex02
             {
                 playRound();
             }
+
             switch (currentGame.GameState)
             {
                 case Game.eGameState.PlayerWon:
