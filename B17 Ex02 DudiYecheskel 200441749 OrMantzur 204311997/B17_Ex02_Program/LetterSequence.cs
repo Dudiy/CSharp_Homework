@@ -26,16 +26,10 @@ namespace B17_Ex02
             }
         }
 
+        //asumption - given sequence is a valid sequence, with no spaces and all uppercase letters
         public LetterSequence(string i_Sequence)
         {
-            m_Sequence = i_Sequence.Replace(" ", "");
-
-            if (!IsValidSequence(i_Sequence, out string dummy))
-            {
-                //TODO Throw execption;
-            }
-
-            m_Sequence = m_Sequence.ToUpper();            
+            m_Sequence = i_Sequence;
         }
 
         public string SequenceStr
@@ -48,36 +42,27 @@ namespace B17_Ex02
             get { return k_LengthOfSequence; }
         }
 
-        //checks if a given string is a valid sequence. o_validationString = the string without spaces if the string is valid, else returns why the string is not valid
-        public static bool IsValidSequence(string i_Sequence, out string o_ValidationString)
+        public static char MaxLetterInSequence
         {
-            //valid =   sequence of exactly "k_LengthOfSequence" letters, upper or lower case letters between 'A' and "k_MaxLetterInSequence"
-            //          same letter can appear more than once.
-            bool isValid = true;
-            string validationResultString = String.Empty;
+            get { return k_MaxLetterInSequence; }
+        }
 
-            i_Sequence = i_Sequence.Replace(" ", "");           //remove all spaces in the input string
-            validationResultString = i_Sequence;
-            if (i_Sequence.Length != k_LengthOfSequence)        //check length of sequence
+        //checks if a given string is a valid sequence. 
+        //assumption: given string is already "k_LengthOfSequence" long, has no spaces, and is all uppercase letters
+        public static bool IsValidSequence(string i_Sequence)
+        {
+            //valid = sequence of upper or lower case letters between 'A' and "k_MaxLetterInSequence"
+            bool isValid = true;
+
+            foreach (char ch in i_Sequence)                 //check letters of sequence
             {
-                isValid = false;                
-                validationResultString = String.Format("Length of sequence must be {0} letters long.", k_LengthOfSequence);
-            }
-            else
-            {
-                foreach (char ch in i_Sequence)                 //check letters of sequence
+                if (!('A' <= ch && ch <= k_MaxLetterInSequence))
                 {
-                    if (!('a' <= ch && ch <= Char.ToLower(k_MaxLetterInSequence) ||
-                          'A' <= ch && ch <= k_MaxLetterInSequence))
-                    {
-                        validationResultString = String.Format("Only upper/lower case letters between 'A' and '{0}' are valid", k_MaxLetterInSequence);
-                        isValid = false;
-                        break;
-                    }
+                    isValid = false;
+                    break;
                 }
             }
 
-            o_ValidationString = validationResultString;
             return isValid;
         }
 
@@ -90,9 +75,9 @@ namespace B17_Ex02
 
             foreach (char ch in m_Sequence)
             {
-                if (i_CompareTo.m_Sequence.Contains(ch.ToString()))         //if the computer's sequence has the current letter
+                if (i_CompareTo.m_Sequence.Contains(ch.ToString()))                 //if the i_CompareTo's sequence has the current letter
                 {
-                    if (currentIndex == i_CompareTo.m_Sequence.IndexOf(ch))        //if the index in the computer's sequence is the same as the current letter's
+                    if (currentIndex == i_CompareTo.m_Sequence.IndexOf(ch))         //if the index in the i_CompareTo's sequence is the same as the current letter's
                     {
                         correctGuessCounter++;
                     }

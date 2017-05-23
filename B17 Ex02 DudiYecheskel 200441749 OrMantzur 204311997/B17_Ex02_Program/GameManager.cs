@@ -193,27 +193,31 @@ namespace B17_Ex02
             }
         }
 
-        // return valid input: valid sequence or "Q"
+        // return valid input: valid sequence or "Q" gmaeManager checks length of input, Letter sequence validates the input
         private string getInputFromUser()
         {
             string userInput = string.Empty;
-            string validationResult;
+            byte expectedInputLen = LetterSequence.LengthOfSequence;
             bool endOfInput = false;
 
             while (!endOfInput)
             {
                 Console.WriteLine("Please type your next guess <A B C D> or 'Q' to quit");
-                userInput = Console.ReadLine();
-                // valid input: valid sequence or "Q"
-                if (LetterSequence.IsValidSequence(userInput, out validationResult) ||
-                    userInput.ToUpper().Equals("Q"))
-                {
+                userInput = Console.ReadLine().Replace(" ","").ToUpper();     //get the input - remove all spaces and set to uppercase letters
+                if (userInput.ToUpper().Equals("Q")){
                     endOfInput = true;
                 }
-                // invalid input, print the kind of error
+                else if (userInput.Length != expectedInputLen)
+                {
+                    Console.WriteLine("Length of sequence must be {0} letters long. Try again", expectedInputLen);
+                }
+                else if (!LetterSequence.IsValidSequence(userInput))
+                {
+                    Console.WriteLine("Only upper/lower case letters between 'A' and '{0}' are valid", LetterSequence.MaxLetterInSequence);
+                }
                 else
                 {
-                    Console.WriteLine("{0} Try again.", validationResult);
+                    endOfInput = true;
                 }
             }
 
