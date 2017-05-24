@@ -18,7 +18,7 @@ namespace B17_Ex02
         private const byte k_MaxNumOfGuesses = 10;
         private byte? m_MaxNumOfGuessesFromPlayer = null;                 // initialized to a valid number
         private byte m_CurrRoundNum = 1;                                  // TODO why not use m_RoundsPlayed.Count?
-        private bool m_RunGameFlag = true;
+        //private bool m_RunGameFlag = true;
         private LetterSequence m_ComputerSequence = new LetterSequence();   // empty ctor generates a random sequence
         private List<Round> m_RoundsPlayed = new List<Round>();
         private eGameState m_CurrentGameState = eGameState.Running;
@@ -49,10 +49,10 @@ namespace B17_Ex02
             }
         }
 
-        public bool RunGameFlag
-        {
-            get { return m_RunGameFlag; }
-        }
+        //public bool RunGameFlag
+        //{
+        //    get { return m_RunGameFlag; }
+        //}
 
         public List<Round> RoundsPlayedList
         {

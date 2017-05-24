@@ -230,7 +230,7 @@ namespace B17_Ex02
                     loseGame();
                     break;
                 case Game.eGameState.GameEnded:
-                    promptUserForRestart();
+                    endGame();
                     break;
                 default:
                     break;
@@ -248,14 +248,13 @@ namespace B17_Ex02
             }
             else
             {
-                endGame();
+                currentGame.EndGame();
             }
         }
 
         private void endGame()
         {
-            Console.WriteLine("The game ended.");
-            currentGame.EndGame();
+            Console.WriteLine("Goodbye");
         }
 
         private void winGame()
