@@ -6,8 +6,8 @@ namespace B17_Ex02
 {
     public class UI
     {
-        private byte m_MaxWordLenWithSpaces = (byte)((2 * LetterSequence.LengthOfSequence) - 1);
         private Game currentGame = null;
+        private readonly byte r_MaxWordLenWithSpaces = (byte)((2 * LetterSequence.LengthOfSequence) - 1);
 
         // ================================================ getting input from user ================================================
         private byte getMaxNumOfGuessesFromUser()
@@ -39,7 +39,7 @@ namespace B17_Ex02
         }
 
         // return valid input: valid sequence or "Q" gmaeManager checks length of input, Letter sequence validates the input
-        private string getInputFromUser()
+        private string getSequenceFromUser()
         {
             string userInput = string.Empty;
             byte expectedInputLen = LetterSequence.LengthOfSequence;
@@ -118,9 +118,9 @@ namespace B17_Ex02
             // first line in table
             // rowTitleString.Append(m_verticalBorderChar);
             rowTitleString.Append('║');
-            rowTitleString.Append("Pins:".PadRight(m_MaxWordLenWithSpaces + 2)); // 2 for space near border
+            rowTitleString.Append("Pins:".PadRight(r_MaxWordLenWithSpaces + 2)); // 2 for space near border
             rowTitleString.Append('║');
-            rowTitleString.Append("Result:".PadRight(m_MaxWordLenWithSpaces));
+            rowTitleString.Append("Result:".PadRight(r_MaxWordLenWithSpaces));
             rowTitleString.Append('║');
             Console.WriteLine(rowTitleString);
             printRowSeperator();
@@ -136,26 +136,28 @@ namespace B17_Ex02
 
             // Pins column
             rowSeperator.Append('╠');
-            rowSeperator.Append(new string('═', m_MaxWordLenWithSpaces + 2)); // 2 for space near border
+            rowSeperator.Append(new string('═', r_MaxWordLenWithSpaces + 2)); // 2 for space near border
             // Result column
             rowSeperator.Append('╬');
-            rowSeperator.Append(new string('═', m_MaxWordLenWithSpaces));
+            rowSeperator.Append(new string('═', r_MaxWordLenWithSpaces));
             rowSeperator.Append('╣');
             Console.WriteLine(rowSeperator);
         }
 
         private void printRounds()
         {
-            string pinsString = string.Empty;
-            string resultString = string.Empty;
+            string pinsString, resultString;
+            byte numOfCorrectGuess, numOfCorrectLetterWrongPosition;
 
             for (int i = 0; i < currentGame.MaxNumOfGuessesFromPlayer; i++)
             {
                 // the (i+1) round has already occurred
-                if (i < currentGame.RoundsPlayedList.Count)
+                if (i < currentGame.NumRound)
                 {
-                    pinsString = currentGame.RoundsPlayedList[i].Sequence;
-                    resultString = currentGame.RoundsPlayedList[i].Result;
+                    pinsString = currentGame.GetRoundSequence(i);
+                    numOfCorrectGuess = currentGame.GetNumOfCorrectGuess(i);
+                    numOfCorrectLetterWrongPosition = currentGame.GetNumOfCorrectLetterWrongPosition(i);
+                    resultString = createResultString(numOfCorrectGuess, numOfCorrectLetterWrongPosition);
                 }
                 else
                 {
@@ -165,6 +167,16 @@ namespace B17_Ex02
                 printRow(pinsString, resultString);
                 printRowSeperator();
             }
+        }
+
+        private string createResultString(byte i_NumOfCorrectGuess, byte i_NumOfCorrectLetterWrongPosition)
+        {
+            StringBuilder resultString = new StringBuilder();
+
+            resultString.AppendFormat(new string('V', i_NumOfCorrectGuess));
+            resultString.AppendFormat(new string('X', i_NumOfCorrectLetterWrongPosition));
+
+            return resultString.ToString();
         }
 
         private void printRow(string i_PinsString, string i_ResultString)
@@ -239,7 +251,7 @@ namespace B17_Ex02
 
         private void playRound()
         {
-            string userInput = getInputFromUser();
+            string userInput = getSequenceFromUser();
 
             if (!userInput.ToUpper().Equals("Q"))
             {
@@ -250,11 +262,6 @@ namespace B17_Ex02
             {
                 currentGame.EndGame();
             }
-        }
-
-        private void endGame()
-        {
-            Console.WriteLine("Goodbye");
         }
 
         private void winGame()
@@ -268,6 +275,11 @@ namespace B17_Ex02
             Console.WriteLine("No more guesses allowed. You Lost.");
             Console.WriteLine("The correct sequence is: {0}", currentGame.ComputerSequence.SequenceStr);
             promptUserForRestart();
+        }
+
+        private void endGame()
+        {
+            Console.WriteLine("Goodbye");
         }
     }
 }

@@ -7,7 +7,8 @@ namespace B17_Ex02
     public class Round
     {
         private LetterSequence m_Sequence;
-        private string m_Result = string.Empty;
+        private byte m_NumOfCorrectGuess;
+        private byte m_NumOfCorrectLetterWrongPosition; // TODO name 2X
         private bool m_WinRound = false;
 
         public Round(string i_SequenceStr)
@@ -17,29 +18,32 @@ namespace B17_Ex02
 
         public string Sequence
         {
-            get { return m_Sequence.SequenceStr; }
+            get
+            {
+                return m_Sequence.SequenceStr;
+            }
         }
 
-        public string Result
+        public byte NumOfCorrectGuess
         {
             get
             {
-                if (m_Result.Equals(string.Empty))
-                {
-                    // TODO throw error??                    
-                }
-                 
-                return m_Result;
+                return m_NumOfCorrectGuess;
             }
         }
-        
-        // updates the value of result, returns true if the guess is correct
+
+        public byte NumOfCorrectLetterWrongPosition
+        {
+            get
+            {
+                return m_NumOfCorrectLetterWrongPosition;
+            }
+        }
+
         public void PlayRound(LetterSequence i_ComputerSequence)
         {
-            m_Result = m_Sequence.Compare(i_ComputerSequence);
-
-            // win round if: length of result is the same as the sequence and there are no 'X' chars
-            m_WinRound = m_Result.Length == LetterSequence.LengthOfSequence && !m_Result.Contains("X");     
+            m_Sequence.Compare(i_ComputerSequence, out m_NumOfCorrectGuess, out m_NumOfCorrectLetterWrongPosition);
+            m_WinRound = (m_NumOfCorrectGuess == LetterSequence.LengthOfSequence);
         }
 
         public bool IsWinRound()
