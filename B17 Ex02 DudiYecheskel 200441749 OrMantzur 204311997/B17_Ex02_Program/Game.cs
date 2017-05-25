@@ -63,10 +63,7 @@ namespace B17_Ex02
 
         public byte MaxNumOfGuessesFromPlayer
         {
-            get
-            {
-                return m_MaxNumOfGuessesFromPlayer;
-            }
+            get { return m_MaxNumOfGuessesFromPlayer; }
         }
 
         public byte GetNumOfRoundsPlayed()
