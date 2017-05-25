@@ -11,7 +11,6 @@ namespace B17_Ex02
     {
         public static void Main()
         {
-
             runUI();
         }
 

@@ -5,10 +5,10 @@ namespace B17_Ex02
 {
     public class LetterSequence
     {
-        private string m_SequenceStr = string.Empty;
         private const byte k_LengthOfSequence = 4;           // this value must be less than or equal to the number of valid unique letters
         private const char k_MaxLetterInSequence = 'H';
-        private static Random s_Randomizer = new Random();    // TODO add seed
+        private static Random s_Randomizer = new Random();    // TODO
+        private string m_SequenceStr = string.Empty;
 
         public LetterSequence()
         {
@@ -26,16 +26,6 @@ namespace B17_Ex02
         }
 
         // asumption - given sequence is a valid sequence, with no spaces and all uppercase letters
-        public LetterSequence(string i_SequenceStr)
-        {
-            m_SequenceStr = i_SequenceStr;
-        }
-
-        public string SequenceStr
-        {
-            get { return m_SequenceStr; }
-        }
-
         public static byte LengthOfSequence
         {
             get { return k_LengthOfSequence; }
@@ -44,6 +34,16 @@ namespace B17_Ex02
         public static char MaxLetterInSequence
         {
             get { return k_MaxLetterInSequence; }
+        }
+
+        public LetterSequence(string i_SequenceStr)
+        {
+            m_SequenceStr = i_SequenceStr;
+        }
+
+        public string SequenceStr
+        {
+            get { return m_SequenceStr; }
         }
 
         // checks if a given string is a valid sequence. 
@@ -66,26 +66,26 @@ namespace B17_Ex02
             return isValid;
         }
 
-        public void Compare(LetterSequence i_CompareTo, out byte o_NumOfCorrectGuesses, out byte o_NumOfCorrectLettersInWrongPositions)
+        public void Compare(LetterSequence i_CompareTo, out byte o_NumOfCorrectGuesses, out byte o_CorrectLettersInWrongPositions)
         {
             StringBuilder result = new StringBuilder();
             byte currentIndex = 0;
 
             o_NumOfCorrectGuesses = 0;
-            o_NumOfCorrectLettersInWrongPositions = 0;
+            o_CorrectLettersInWrongPositions = 0;
             foreach (char ch in m_SequenceStr)
             {
                 // if the i_CompareTo's sequence has the current letter
-                if (i_CompareTo.m_SequenceStr.Contains(ch.ToString()))                 
+                if (i_CompareTo.m_SequenceStr.Contains(ch.ToString()))
                 {
                     // if the index in the i_CompareTo's sequence is the same as the current letter's
-                    if (currentIndex == i_CompareTo.m_SequenceStr.IndexOf(ch))         
+                    if (currentIndex == i_CompareTo.m_SequenceStr.IndexOf(ch))
                     {
                         o_NumOfCorrectGuesses++;
                     }
                     else
                     {
-                        o_NumOfCorrectLettersInWrongPositions++;
+                        o_CorrectLettersInWrongPositions++;
                     }
                 }
 

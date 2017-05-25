@@ -5,8 +5,8 @@ namespace B17_Ex02
 {
     public class UI
     {
-        private Game m_CurrentGame = null;
         private readonly byte r_MaxWordLenWithSpaces = (byte)((2 * LetterSequence.LengthOfSequence) - 1);
+        private Game m_CurrentGame = null;
 
         // ================================================ getting input from user ================================================
         private byte getMaxNumOfGuessesFromUser()
@@ -20,7 +20,8 @@ namespace B17_Ex02
             {
                 Console.WriteLine(
 @"Please input max number of guesses (a number between {0} and {1}):",
-Game.MinNumOfGuesses, Game.MaxNumOfGuesses);
+Game.MinNumOfGuesses, 
+Game.MaxNumOfGuesses);
                 userInputStr = Console.ReadLine();
                 if (!(inputIsByte = byte.TryParse(userInputStr, out userInputByte)))
                 {
@@ -161,7 +162,7 @@ LetterSequence.MaxLetterInSequence);
             string pinsString = string.Empty;
             string resultString = string.Empty;
             byte numOfCorrectGuesses;
-            byte numOfCorrectLettersInWrongPositions;
+            byte numOfCorrectLetterInWrongPositions;
 
             for (int i = 0; i < m_CurrentGame.MaxNumOfGuessesFromPlayer; i++)
             {
@@ -170,8 +171,8 @@ LetterSequence.MaxLetterInSequence);
                 {
                     pinsString = m_CurrentGame.GetRoundLetterSequenceStr(i);
                     numOfCorrectGuesses = m_CurrentGame.GetNumOfCorrectGuesses(i);
-                    numOfCorrectLettersInWrongPositions = m_CurrentGame.GetNumOfCorrectLettersInWrongPositions(i);
-                    resultString = createResultString(numOfCorrectGuesses, numOfCorrectLettersInWrongPositions);
+                    numOfCorrectLetterInWrongPositions = m_CurrentGame.GetNumOfCorrectLetterInWrongPositions(i);
+                    resultString = createResultString(numOfCorrectGuesses, numOfCorrectLetterInWrongPositions);
                 }
                 else
                 {
@@ -184,12 +185,12 @@ LetterSequence.MaxLetterInSequence);
             }
         }
 
-        private string createResultString(byte i_NumOfCorrectGuesses, byte i_NumOfCorrectLettersInWrongPositions)
+        private string createResultString(byte i_NumOfCorrectGuesses, byte i_NumOfCorrectLetterInWrongPositions)
         {
             StringBuilder resultString = new StringBuilder();
 
             resultString.AppendFormat(new string('V', i_NumOfCorrectGuesses));
-            resultString.AppendFormat(new string('X', i_NumOfCorrectLettersInWrongPositions));
+            resultString.AppendFormat(new string('X', i_NumOfCorrectLetterInWrongPositions));
 
             return resultString.ToString();
         }
@@ -267,7 +268,7 @@ LetterSequence.MaxLetterInSequence);
         private void playRound()
         {
             string userInput = getSequenceFromUser();
-           
+
             if (!userInput.ToUpper().Equals("Q"))
             {
                 m_CurrentGame.PlayRound(userInput);
@@ -282,7 +283,7 @@ LetterSequence.MaxLetterInSequence);
         private void winGame()
         {
             Console.WriteLine(
-@"You guessed after {0} steps!", 
+@"You guessed after {0} steps!",
 m_CurrentGame.GetNumOfRoundsPlayed());
             promptUserForRestart();
         }

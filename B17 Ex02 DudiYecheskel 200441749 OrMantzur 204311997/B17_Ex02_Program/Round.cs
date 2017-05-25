@@ -4,7 +4,7 @@
     {
         private LetterSequence m_Sequence;
         private byte m_NumOfCorrectGuesses;
-        private byte m_NumOfCorrectLettersInWrongPositions; 
+        private byte m_NumOfCorrectLettersInWrongPositions;
         private bool m_IsWinningRound = false;
 
         public Round(string i_SequenceStr)
@@ -22,7 +22,7 @@
             get { return m_NumOfCorrectGuesses; }
         }
 
-        public byte NumOfCorrectLettersInWrongPositions
+        public byte NumOfCorrectLetterInWrongPositions
         {
             get { return m_NumOfCorrectLettersInWrongPositions; }
         }
@@ -35,7 +35,7 @@
         public void PlayRound(LetterSequence i_ComputerSequence)
         {
             m_Sequence.Compare(i_ComputerSequence, out m_NumOfCorrectGuesses, out m_NumOfCorrectLettersInWrongPositions);
-            m_IsWinningRound = (m_NumOfCorrectGuesses == LetterSequence.LengthOfSequence);
+            m_IsWinningRound = m_NumOfCorrectGuesses == LetterSequence.LengthOfSequence;
         }
     }
 }
