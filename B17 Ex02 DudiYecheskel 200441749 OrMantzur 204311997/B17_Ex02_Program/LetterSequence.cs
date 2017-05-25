@@ -17,7 +17,7 @@ namespace B17_Ex02
     {
         private const byte k_LengthOfSequence = 4;           // this value must be less than or equal to the number of valid unique letters
         private const char k_MaxLetterInSequence = 'H';
-        private static Random s_Randomizer = new Random();    // TODO
+        private static Random s_Randomizer = new Random();
         private string m_SequenceStr = string.Empty;
 
         public LetterSequence()

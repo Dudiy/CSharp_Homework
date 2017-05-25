@@ -26,8 +26,8 @@ namespace B17_Ex02
         private const byte k_MaxNumOfGuesses = 10;
         private List<Round> m_RoundsPlayed = new List<Round>();
         private LetterSequence m_ComputerSequence = new LetterSequence();   // empty ctor generates a random sequence
-        private byte? m_MaxNumOfGuessesFromPlayer = null;
         private eGameState m_CurrentGameState = eGameState.Running;
+        private byte m_MaxNumOfGuessesFromPlayer;
 
         // asumption i_MaxNumOfGuessesFromPlayer is a valid input
         public Game(byte i_MaxNumOfGuessesFromPlayer)
@@ -65,8 +65,7 @@ namespace B17_Ex02
         {
             get
             {
-                // TODO throw execption if null
-                return (byte)m_MaxNumOfGuessesFromPlayer;
+                return m_MaxNumOfGuessesFromPlayer;
             }
         }
 
