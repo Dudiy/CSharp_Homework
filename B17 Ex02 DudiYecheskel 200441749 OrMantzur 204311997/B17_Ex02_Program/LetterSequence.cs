@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * B17_Ex02: LetterSequence.cs
+ * 
+ * This class manages the logic for each guess of the player (letter sequence)
+ * 
+ * Written by:
+ * 204311997 - Or Mantzur
+ * 200441749 - Dudi Yecheskel 
+*/
+
+using System;
 using System.Text;
 
 namespace B17_Ex02

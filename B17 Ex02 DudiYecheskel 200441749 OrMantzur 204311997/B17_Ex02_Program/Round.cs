@@ -1,4 +1,14 @@
-﻿namespace B17_Ex02
+﻿/*
+ * B17_Ex02: Round.cs
+ * 
+ * This class manages the logic for each round of the game
+ * 
+ * Written by:
+ * 204311997 - Or Mantzur
+ * 200441749 - Dudi Yecheskel 
+*/
+
+namespace B17_Ex02
 {
     public class Round
     {

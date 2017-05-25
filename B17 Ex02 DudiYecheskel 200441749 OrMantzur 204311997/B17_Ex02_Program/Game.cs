@@ -1,4 +1,14 @@
-﻿using System.Collections.Generic;
+﻿/*
+ * B17_Ex02: Game.cs
+ * 
+ * This class manages the logic of the game.
+ * 
+ * Written by:
+ * 204311997 - Or Mantzur
+ * 200441749 - Dudi Yecheskel 
+*/
+
+using System.Collections.Generic;
 
 namespace B17_Ex02
 {

@@ -1,12 +1,23 @@
-﻿using System;
+﻿/*
+ * B17_Ex02: UI.cs
+ * 
+ * This class manages all UI of the game itself
+ * this UI is made for playing via the console.
+ * 
+ * Written by:
+ * 204311997 - Or Mantzur
+ * 200441749 - Dudi Yecheskel 
+*/
+
+using System;
 using System.Text;
 
 namespace B17_Ex02
 {
     public class UI
     {
-        private readonly byte r_MaxWordLenWithSpaces = (byte)((2 * LetterSequence.LengthOfSequence) - 1);
         private Game m_CurrentGame = null;
+        private readonly byte r_MaxWordLenWithSpaces = (byte)((2 * LetterSequence.LengthOfSequence) - 1);
 
         // ================================================ getting input from user ================================================
         private byte getMaxNumOfGuessesFromUser()
