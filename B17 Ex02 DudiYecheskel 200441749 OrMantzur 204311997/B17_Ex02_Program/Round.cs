@@ -7,48 +7,39 @@ namespace B17_Ex02
     public class Round
     {
         private LetterSequence m_Sequence;
-        private byte m_NumOfCorrectGuess;
-        private byte m_NumOfCorrectLetterWrongPosition; // TODO name 2X
-        private bool m_WinRound = false;
+        private byte m_NumOfCorrectGuesses;
+        private byte m_NumOfCorrectLettersInWrongPositions;
+        private bool m_IsWinningRound = false;
 
         public Round(string i_SequenceStr)
         {
             m_Sequence = new LetterSequence(i_SequenceStr);
         }
 
-        public string Sequence
+        public string SequenceStr
         {
-            get
-            {
-                return m_Sequence.SequenceStr;
-            }
+            get { return m_Sequence.SequenceStr; }
         }
 
-        public byte NumOfCorrectGuess
+        public byte NumOfCorrectGuesses
         {
-            get
-            {
-                return m_NumOfCorrectGuess;
-            }
+            get { return m_NumOfCorrectGuesses; }
         }
 
-        public byte NumOfCorrectLetterWrongPosition
+        public byte NumOfCorrectLettersInWrongPositions
         {
-            get
-            {
-                return m_NumOfCorrectLetterWrongPosition;
-            }
+            get { return m_NumOfCorrectLettersInWrongPositions; }
+        }
+
+        public bool IsWinningRound
+        {
+            get { return m_IsWinningRound; }
         }
 
         public void PlayRound(LetterSequence i_ComputerSequence)
         {
-            m_Sequence.Compare(i_ComputerSequence, out m_NumOfCorrectGuess, out m_NumOfCorrectLetterWrongPosition);
-            m_WinRound = (m_NumOfCorrectGuess == LetterSequence.LengthOfSequence);
-        }
-
-        public bool IsWinRound()
-        {
-            return m_WinRound;          // TODO change to m_playerWon and use getter?
+            m_Sequence.Compare(i_ComputerSequence, out m_NumOfCorrectGuesses, out m_NumOfCorrectLettersInWrongPositions);
+            m_IsWinningRound = (m_NumOfCorrectGuesses == LetterSequence.LengthOfSequence);
         }
     }
 }
