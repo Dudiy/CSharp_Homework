@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace B17_Ex02
 {
     public class UI
     {
-        private Game currentGame = null;
+        private Game m_CurrentGame = null;
         private readonly byte r_MaxWordLenWithSpaces = (byte)((2 * LetterSequence.LengthOfSequence) - 1);
 
         // ================================================ getting input from user ================================================
@@ -15,19 +14,25 @@ namespace B17_Ex02
             string userInputStr = string.Empty;
             bool isValidInput = false;
             bool inputIsByte = false;
-            byte userInputByte = 0;         // TODO Important!!! should not be 0 how do we use nullable here?
+            byte userInputByte = Game.MinNumOfGuesses;
 
             while (!isValidInput)
             {
-                Console.WriteLine("Please input max number of guesses (a number between {0} and {1}):", Game.MinNumOfGuesses, Game.MaxNumOfGuesses);
+                Console.WriteLine(
+@"Please input max number of guesses (a number between {0} and {1}):",
+Game.MinNumOfGuesses, Game.MaxNumOfGuesses);
                 userInputStr = Console.ReadLine();
                 if (!(inputIsByte = byte.TryParse(userInputStr, out userInputByte)))
                 {
-                    Console.WriteLine("Invalid input, please try again.\n");
+                    Console.WriteLine(
+@"Invalid input, please try again.
+");
                 }
-                else if (!Game.isValidNumOfGuesses(userInputByte))
+                else if (!Game.IsValidNumOfGuesses(userInputByte))
                 {
-                    Console.WriteLine("The number is out of range, please input a number between 4 and 10.\n");
+                    Console.WriteLine(
+@"The number is out of range, please input a number between 4 and 10.
+");
                 }
                 else
                 {
@@ -38,7 +43,7 @@ namespace B17_Ex02
             return userInputByte;
         }
 
-        // return valid input: valid sequence or "Q" gmaeManager checks length of input, Letter sequence validates the input
+        // return valid input: valid sequence or "Q" gameManager checks length of input, Letter sequence validates the input
         private string getSequenceFromUser()
         {
             string userInput = string.Empty;
@@ -47,19 +52,25 @@ namespace B17_Ex02
 
             while (!endOfInput)
             {
-                Console.WriteLine("Please type your next guess <A B C D> or 'Q' to quit");
-                userInput = Console.ReadLine().Replace(" ", string.Empty).ToUpper();     // get the input - remove all spaces and set to uppercase letters
+                Console.WriteLine(
+@"Please type your next guess <A B C D> or 'Q' to quit");
+                // get the input - remove all spaces and set to uppercase letters
+                userInput = Console.ReadLine().Replace(" ", string.Empty).ToUpper();
                 if (userInput.ToUpper().Equals("Q"))
                 {
                     endOfInput = true;
                 }
                 else if (userInput.Length != expectedInputLen)
                 {
-                    Console.WriteLine("Length of sequence must be {0} letters long. Try again", expectedInputLen);
+                    Console.WriteLine(
+@"Length of sequence must be {0} letters long. Try again",
+expectedInputLen);
                 }
                 else if (!LetterSequence.IsValidSequence(userInput))
                 {
-                    Console.WriteLine("Only upper/lower case letters between 'A' and '{0}' are valid", LetterSequence.MaxLetterInSequence);
+                    Console.WriteLine(
+@"Only upper/lower case letters between 'A' and '{0}' are valid",
+LetterSequence.MaxLetterInSequence);
                 }
                 else
                 {
@@ -75,7 +86,8 @@ namespace B17_Ex02
             string userInput = string.Empty;
             bool endOfInput = false;
 
-            Console.WriteLine("Would you like to start a new game? <Y/N>");
+            Console.WriteLine(
+@"Would you like to start a new game? <Y/N>");
             userInput = Console.ReadLine();
             while (!endOfInput)
             {
@@ -91,7 +103,8 @@ namespace B17_Ex02
                 }
                 else
                 {
-                    Console.WriteLine("Error - please insert Y/N");
+                    Console.WriteLine(
+@"Error - please insert Y/N");
                     userInput = Console.ReadLine();
                 }
             }
@@ -101,11 +114,10 @@ namespace B17_Ex02
         private void printBoard()
         {
             Ex02.ConsoleUtils.Screen.Clear();
-            Console.WriteLine("Current board status:");
-
+            Console.WriteLine(
+@"Current board status:");
             // print the title row and the first row
             printFirstTwoRows();
-
             // print the rest of the table
             printRounds();
         }
@@ -116,15 +128,14 @@ namespace B17_Ex02
             string hiddenComputerSequenceStr = new string('#', LetterSequence.LengthOfSequence);
 
             // first line in table
-            // rowTitleString.Append(m_verticalBorderChar);
             rowTitleString.Append('║');
-            rowTitleString.Append("Pins:".PadRight(r_MaxWordLenWithSpaces + 2)); // 2 for space near border
+            // +2 for space near border
+            rowTitleString.Append("Pins:".PadRight(r_MaxWordLenWithSpaces + 2));
             rowTitleString.Append('║');
             rowTitleString.Append("Result:".PadRight(r_MaxWordLenWithSpaces));
             rowTitleString.Append('║');
             Console.WriteLine(rowTitleString);
             printRowSeperator();
-
             // second line in table
             printRow(hiddenComputerSequenceStr, string.Empty);
             printRowSeperator();
@@ -136,7 +147,8 @@ namespace B17_Ex02
 
             // Pins column
             rowSeperator.Append('╠');
-            rowSeperator.Append(new string('═', r_MaxWordLenWithSpaces + 2)); // 2 for space near border
+            // +2 for space near border
+            rowSeperator.Append(new string('═', r_MaxWordLenWithSpaces + 2));
             // Result column
             rowSeperator.Append('╬');
             rowSeperator.Append(new string('═', r_MaxWordLenWithSpaces));
@@ -146,22 +158,25 @@ namespace B17_Ex02
 
         private void printRounds()
         {
-            string pinsString, resultString;
-            byte numOfCorrectGuess, numOfCorrectLetterWrongPosition;
+            string pinsString = string.Empty;
+            string resultString = string.Empty;
+            byte numOfCorrectGuesses;
+            byte numOfCorrectLetterInWrongPositions;
 
-            for (int i = 0; i < currentGame.MaxNumOfGuessesFromPlayer; i++)
+            for (int i = 0; i < m_CurrentGame.MaxNumOfGuessesFromPlayer; i++)
             {
-                // the (i+1) round has already occurred
-                if (i < currentGame.NumRound)
+                // if (i < m_CurrentGame.NumRound) then Round[i] has occured else print blank row
+                if (i < m_CurrentGame.GetNumOfRoundsPlayed())
                 {
-                    pinsString = currentGame.GetRoundSequence(i);
-                    numOfCorrectGuess = currentGame.GetNumOfCorrectGuess(i);
-                    numOfCorrectLetterWrongPosition = currentGame.GetNumOfCorrectLetterWrongPosition(i);
-                    resultString = createResultString(numOfCorrectGuess, numOfCorrectLetterWrongPosition);
+                    pinsString = m_CurrentGame.GetRoundLetterSequenceStr(i);
+                    numOfCorrectGuesses = m_CurrentGame.GetNumOfCorrectGuesses(i);
+                    numOfCorrectLetterInWrongPositions = m_CurrentGame.GetNumOfCorrectLetterInWrongPositions(i);
+                    resultString = createResultString(numOfCorrectGuesses, numOfCorrectLetterInWrongPositions);
                 }
                 else
                 {
-                    pinsString = resultString = string.Empty;
+                    pinsString = string.Empty;
+                    resultString = string.Empty;
                 }
 
                 printRow(pinsString, resultString);
@@ -169,12 +184,12 @@ namespace B17_Ex02
             }
         }
 
-        private string createResultString(byte i_NumOfCorrectGuess, byte i_NumOfCorrectLetterWrongPosition)
+        private string createResultString(byte i_NumOfCorrectGuesses, byte i_NumOfCorrectLetterInWrongPositions)
         {
             StringBuilder resultString = new StringBuilder();
 
-            resultString.AppendFormat(new string('V', i_NumOfCorrectGuess));
-            resultString.AppendFormat(new string('X', i_NumOfCorrectLetterWrongPosition));
+            resultString.AppendFormat(new string('V', i_NumOfCorrectGuesses));
+            resultString.AppendFormat(new string('X', i_NumOfCorrectLetterInWrongPositions));
 
             return resultString.ToString();
         }
@@ -218,22 +233,22 @@ namespace B17_Ex02
         public void StartNewGame()
         {
             Ex02.ConsoleUtils.Screen.Clear();
-            currentGame = new Game(getMaxNumOfGuessesFromUser());
+            m_CurrentGame = new Game(getMaxNumOfGuessesFromUser());
             printBoard();
-            while (currentGame.GameState.Equals(Game.eGameState.Running))
+            while (m_CurrentGame.GameState.Equals(Game.eGameState.Running))
             {
                 run();
             }
         }
 
-        public void run()
+        private void run()
         {
-            while (currentGame.GameState.Equals(Game.eGameState.Running))
+            while (m_CurrentGame.GameState.Equals(Game.eGameState.Running))
             {
                 playRound();
             }
 
-            switch (currentGame.GameState)
+            switch (m_CurrentGame.GameState)
             {
                 case Game.eGameState.PlayerWon:
                     winGame();
@@ -255,31 +270,37 @@ namespace B17_Ex02
 
             if (!userInput.ToUpper().Equals("Q"))
             {
-                currentGame.PlayRound(userInput);
+                m_CurrentGame.PlayRound(userInput);
                 printBoard();
             }
             else
             {
-                currentGame.EndGame();
+                m_CurrentGame.EndGame();
             }
         }
 
         private void winGame()
         {
-            Console.WriteLine("You guessed after {0} steps!", currentGame.CurrRoundNum - 1);
+            Console.WriteLine(
+@"You guessed after {0} steps!", 
+m_CurrentGame.GetNumOfRoundsPlayed());
             promptUserForRestart();
         }
 
         private void loseGame()
         {
-            Console.WriteLine("No more guesses allowed. You Lost.");
-            Console.WriteLine("The correct sequence is: {0}", currentGame.ComputerSequence.SequenceStr);
+            Console.WriteLine(
+@"No more guesses allowed. You Lost.");
+            Console.WriteLine(
+@"The correct sequence is: {0}",
+m_CurrentGame.ComputerSequence);
             promptUserForRestart();
         }
 
         private void endGame()
         {
-            Console.WriteLine("Goodbye");
+            Console.WriteLine(
+@"Goodbye");
         }
     }
 }

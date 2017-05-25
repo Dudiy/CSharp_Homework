@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace B17_Ex02
 {
@@ -8,7 +6,7 @@ namespace B17_Ex02
     {
         public enum eGameState
         {
-            Running = 0,
+            Running,
             PlayerWon,
             PlayerLost,
             GameEnded
@@ -18,12 +16,11 @@ namespace B17_Ex02
         private LetterSequence m_ComputerSequence = new LetterSequence();   // empty ctor generates a random sequence
         private const byte k_MinNumOfGuesses = 4;
         private const byte k_MaxNumOfGuesses = 10;
-        private byte? m_MaxNumOfGuessesFromPlayer = null;                 // initialized to a valid number
-        private byte m_CurrRoundNum = 1;                                  // TODO why not use m_RoundsPlayed.Count?
+        private byte? m_MaxNumOfGuessesFromPlayer = null;
         private eGameState m_CurrentGameState = eGameState.Running;
 
         // asumption i_MaxNumOfGuessesFromPlayer is a valid input
-        public Game(byte i_MaxNumOfGuessesFromPlayer)                                 // TODO changed from "start" to ctor
+        public Game(byte i_MaxNumOfGuessesFromPlayer)
         {
             m_MaxNumOfGuessesFromPlayer = i_MaxNumOfGuessesFromPlayer;
         }
@@ -34,17 +31,9 @@ namespace B17_Ex02
             get { return m_CurrentGameState; }
         }
 
-        public byte NumRound            // TODO need to be in form of function ?
+        public string ComputerSequence
         {
-            get
-            {
-                return (byte)m_RoundsPlayed.Count;
-            }
-        }
-
-        public LetterSequence ComputerSequence
-        {
-            get { return m_ComputerSequence; }
+            get { return m_ComputerSequence.SequenceStr; }
         }
 
         public static byte MinNumOfGuesses
@@ -62,57 +51,48 @@ namespace B17_Ex02
             get
             {
                 // TODO throw execption if null
-                return (byte)m_MaxNumOfGuessesFromPlayer;  //?? 4; // TODO 4 ?
+                return (byte)m_MaxNumOfGuessesFromPlayer;
             }
         }
 
-        //public List<Round> RoundsPlayedList
-        //{
-        //    get { return m_RoundsPlayed; }
-        //}
-
-        public byte CurrRoundNum
+        public byte GetNumOfRoundsPlayed()
         {
-            get { return m_CurrRoundNum; }
+            return (byte)m_RoundsPlayed.Count;
         }
 
-
-        public static bool isValidNumOfGuesses(byte i_NumOfGuessesFromUser)
+        public static bool IsValidNumOfGuesses(byte i_NumOfGuessesFromUser)
         {
-            return k_MinNumOfGuesses <= i_NumOfGuessesFromUser && i_NumOfGuessesFromUser <= k_MaxNumOfGuesses;
+            return (k_MinNumOfGuesses <= i_NumOfGuessesFromUser) && (i_NumOfGuessesFromUser <= k_MaxNumOfGuesses);
         }
 
-        public string GetRoundSequence(int i_RoundInd)
+        public string GetRoundLetterSequenceStr(int i_RoundInd)
         {
-            return m_RoundsPlayed[i_RoundInd].Sequence;
+            return m_RoundsPlayed[i_RoundInd].SequenceStr;
         }
 
-        public byte GetNumOfCorrectGuess(int i_RoundInd)
+        public byte GetNumOfCorrectGuesses(int i_RoundInd)
         {
-            return m_RoundsPlayed[i_RoundInd].NumOfCorrectGuess;
+            return m_RoundsPlayed[i_RoundInd].NumOfCorrectGuesses;
         }
 
-        public byte GetNumOfCorrectLetterWrongPosition(int i_RoundInd)
+        public byte GetNumOfCorrectLetterInWrongPositions(int i_RoundInd)
         {
-            return m_RoundsPlayed[i_RoundInd].NumOfCorrectLetterWrongPosition;
+            return m_RoundsPlayed[i_RoundInd].NumOfCorrectLetterInWrongPositions;
         }
 
-        // get input from user and update the curren Round
+        // get input from user and update the current Round
         public void PlayRound(string i_UserInput)
         {
-            Round currentRound;
+            Round currentRound = new Round(i_UserInput);
 
-            // sequence input
-            currentRound = new Round(i_UserInput);
             currentRound.PlayRound(m_ComputerSequence);
             m_RoundsPlayed.Add(currentRound);
-            m_CurrRoundNum++;
-            if (currentRound.IsWinRound())
+            if (currentRound.IsWinningRound)
             {
                 m_CurrentGameState = eGameState.PlayerWon;
             }
 
-            if (m_CurrRoundNum > m_MaxNumOfGuessesFromPlayer)
+            if (m_RoundsPlayed.Count > m_MaxNumOfGuessesFromPlayer)
             {
                 m_CurrentGameState = eGameState.PlayerLost;
             }
