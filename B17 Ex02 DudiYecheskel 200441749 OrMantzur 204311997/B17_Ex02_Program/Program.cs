@@ -26,7 +26,7 @@ namespace B17_Ex02
 
         private static void runUI()
         {
-            UI userInterface = new UI();
+            ConsoleUI userInterface = new ConsoleUI();
 
             userInterface.StartNewGame();
         }

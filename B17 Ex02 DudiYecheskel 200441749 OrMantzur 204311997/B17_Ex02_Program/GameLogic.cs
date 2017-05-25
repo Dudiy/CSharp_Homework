@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace B17_Ex02
 {
-    public class Game
+    public class GameLogic
     {
         public enum eGameState
         {
@@ -30,7 +30,7 @@ namespace B17_Ex02
         private byte m_MaxNumOfGuessesFromPlayer;
 
         // asumption i_MaxNumOfGuessesFromPlayer is a valid input
-        public Game(byte i_MaxNumOfGuessesFromPlayer)
+        public GameLogic(byte i_MaxNumOfGuessesFromPlayer)
         {
             m_MaxNumOfGuessesFromPlayer = i_MaxNumOfGuessesFromPlayer;
         }

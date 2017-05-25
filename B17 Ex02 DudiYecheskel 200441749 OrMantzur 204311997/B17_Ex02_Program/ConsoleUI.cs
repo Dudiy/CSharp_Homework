@@ -14,9 +14,9 @@ using System.Text;
 
 namespace B17_Ex02
 {
-    public class UI
+    public class ConsoleUI
     {
-        private Game m_CurrentGame = null;
+        private GameLogic m_CurrentGame = null;
         private readonly byte r_MaxWordLenWithSpaces = (byte)((2 * LetterSequence.LengthOfSequence) - 1);
 
         // ================================================ getting input from user ================================================
@@ -25,14 +25,14 @@ namespace B17_Ex02
             string userInputStr = string.Empty;
             bool isValidInput = false;
             bool inputIsByte = false;
-            byte userInputByte = Game.MinNumOfGuesses;
+            byte userInputByte = GameLogic.MinNumOfGuesses;
 
             while (!isValidInput)
             {
                 Console.WriteLine(
 @"Please input max number of guesses (a number between {0} and {1}):",
-Game.MinNumOfGuesses, 
-Game.MaxNumOfGuesses);
+GameLogic.MinNumOfGuesses, 
+GameLogic.MaxNumOfGuesses);
                 userInputStr = Console.ReadLine();
                 if (!(inputIsByte = byte.TryParse(userInputStr, out userInputByte)))
                 {
@@ -40,7 +40,7 @@ Game.MaxNumOfGuesses);
 @"Invalid input, please try again.
 ");
                 }
-                else if (!Game.IsValidNumOfGuesses(userInputByte))
+                else if (!GameLogic.IsValidNumOfGuesses(userInputByte))
                 {
                     Console.WriteLine(
 @"The number is out of range, please input a number between 4 and 10.
@@ -245,9 +245,9 @@ LetterSequence.MaxLetterInSequence);
         public void StartNewGame()
         {
             Ex02.ConsoleUtils.Screen.Clear();
-            m_CurrentGame = new Game(getMaxNumOfGuessesFromUser());
+            m_CurrentGame = new GameLogic(getMaxNumOfGuessesFromUser());
             printBoard();
-            while (m_CurrentGame.GameState.Equals(Game.eGameState.Running))
+            while (m_CurrentGame.GameState.Equals(GameLogic.eGameState.Running))
             {
                 run();
             }
@@ -255,20 +255,20 @@ LetterSequence.MaxLetterInSequence);
 
         private void run()
         {
-            while (m_CurrentGame.GameState.Equals(Game.eGameState.Running))
+            while (m_CurrentGame.GameState.Equals(GameLogic.eGameState.Running))
             {
                 playRound();
             }
 
             switch (m_CurrentGame.GameState)
             {
-                case Game.eGameState.PlayerWon:
+                case GameLogic.eGameState.PlayerWon:
                     winGame();
                     break;
-                case Game.eGameState.PlayerLost:
+                case GameLogic.eGameState.PlayerLost:
                     loseGame();
                     break;
-                case Game.eGameState.GameEnded:
+                case GameLogic.eGameState.GameEnded:
                     endGame();
                     break;
                 default:
