@@ -114,7 +114,8 @@ LetterSequence.MaxLetterInSequence);
         private void printBoard()
         {
             Ex02.ConsoleUtils.Screen.Clear();
-            Console.WriteLine("Current board status:");
+            Console.WriteLine(
+@"Current board status:");
             // print the title row and the first row
             printFirstTwoRows();
             // print the rest of the table
@@ -126,9 +127,9 @@ LetterSequence.MaxLetterInSequence);
             StringBuilder rowTitleString = new StringBuilder();
             string hiddenComputerSequenceStr = new string('#', LetterSequence.LengthOfSequence);
 
-            // first line in table            
+            // first line in table
             rowTitleString.Append('║');
-            // + 2 for space near border
+            // +2 for space near border
             rowTitleString.Append("Pins:".PadRight(r_MaxWordLenWithSpaces + 2));
             rowTitleString.Append('║');
             rowTitleString.Append("Result:".PadRight(r_MaxWordLenWithSpaces));
@@ -146,7 +147,7 @@ LetterSequence.MaxLetterInSequence);
 
             // Pins column
             rowSeperator.Append('╠');
-            // + 2 for space near border
+            // +2 for space near border
             rowSeperator.Append(new string('═', r_MaxWordLenWithSpaces + 2));
             // Result column
             rowSeperator.Append('╬');
@@ -164,7 +165,7 @@ LetterSequence.MaxLetterInSequence);
 
             for (int i = 0; i < m_CurrentGame.MaxNumOfGuessesFromPlayer; i++)
             {
-                // if (i < currentGame.NumRound) then Round[i] has occured else print blank row
+                // if (i < m_CurrentGame.NumRound) then Round[i] has occured else print blank row
                 if (i < m_CurrentGame.GetNumOfRoundsPlayed())
                 {
                     pinsString = m_CurrentGame.GetRoundLetterSequenceStr(i);
@@ -291,7 +292,7 @@ m_CurrentGame.GetNumOfRoundsPlayed());
             Console.WriteLine(
 @"No more guesses allowed. You Lost.");
             Console.WriteLine(
-@"The correct sequence is: {0}", 
+@"The correct sequence is: {0}",
 m_CurrentGame.ComputerSequence);
             promptUserForRestart();
         }

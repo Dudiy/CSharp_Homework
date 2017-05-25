@@ -31,11 +31,6 @@ namespace B17_Ex02
             get { return m_CurrentGameState; }
         }
 
-        public byte GetNumOfRoundsPlayed()
-        {
-            return (byte)m_RoundsPlayed.Count;
-        }
-
         public string ComputerSequence
         {
             get { return m_ComputerSequence.SequenceStr; }
@@ -60,6 +55,11 @@ namespace B17_Ex02
             }
         }
 
+        public byte GetNumOfRoundsPlayed()
+        {
+            return (byte)m_RoundsPlayed.Count;
+        }
+
         public static bool IsValidNumOfGuesses(byte i_NumOfGuessesFromUser)
         {
             return (k_MinNumOfGuesses <= i_NumOfGuessesFromUser) && (i_NumOfGuessesFromUser <= k_MaxNumOfGuesses);
@@ -75,16 +75,16 @@ namespace B17_Ex02
             return m_RoundsPlayed[i_RoundInd].NumOfCorrectGuesses;
         }
 
-        public byte GetNumOfCorrectLettersInWrongPositions(int i_RoundInd)
+        public byte GetNumOfCorrectLetterInWrongPositions(int i_RoundInd)
         {
-            return m_RoundsPlayed[i_RoundInd].NumOfCorrectLettersInWrongPositions;
+            return m_RoundsPlayed[i_RoundInd].NumOfCorrectLetterInWrongPositions;
         }
 
         // get input from user and update the current Round
         public void PlayRound(string i_UserInput)
         {
             Round currentRound = new Round(i_UserInput);
-            
+
             currentRound.PlayRound(m_ComputerSequence);
             m_RoundsPlayed.Add(currentRound);
             if (currentRound.IsWinningRound)

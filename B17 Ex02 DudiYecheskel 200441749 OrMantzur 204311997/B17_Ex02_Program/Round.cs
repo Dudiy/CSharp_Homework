@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace B17_Ex02
+﻿namespace B17_Ex02
 {
     public class Round
     {
         private LetterSequence m_Sequence;
         private byte m_NumOfCorrectGuesses;
-        private byte m_NumOfCorrectLettersInWrongPositions;
+        private byte m_NumOfCorrectLettersInWrongPositions; 
         private bool m_IsWinningRound = false;
 
         public Round(string i_SequenceStr)

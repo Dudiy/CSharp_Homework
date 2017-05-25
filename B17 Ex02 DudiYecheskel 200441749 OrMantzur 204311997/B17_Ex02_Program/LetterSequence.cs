@@ -8,17 +8,17 @@ namespace B17_Ex02
         private string m_SequenceStr = string.Empty;
         private const byte k_LengthOfSequence = 4;           // this value must be less than or equal to the number of valid unique letters
         private const char k_MaxLetterInSequence = 'H';
-        private static Random s_randomizer = new Random();      // TODO add seed
+        private static Random s_Randomizer = new Random();    // TODO add seed
 
         public LetterSequence()
         {
-            char currentRandomChar = (char)s_randomizer.Next('A', k_MaxLetterInSequence);
+            char currentRandomChar = (char)s_Randomizer.Next('A', k_MaxLetterInSequence);
 
             for (int i = 0; i < k_LengthOfSequence; i++)
             {
                 while (m_SequenceStr.Contains(currentRandomChar.ToString()))
                 {
-                    currentRandomChar = (char)s_randomizer.Next('A', k_MaxLetterInSequence);
+                    currentRandomChar = (char)s_Randomizer.Next('A', k_MaxLetterInSequence);
                 }
 
                 m_SequenceStr = string.Concat(m_SequenceStr, currentRandomChar);
@@ -76,10 +76,10 @@ namespace B17_Ex02
             foreach (char ch in m_SequenceStr)
             {
                 // if the i_CompareTo's sequence has the current letter
-                if (i_CompareTo.m_SequenceStr.Contains(ch.ToString()))
+                if (i_CompareTo.m_SequenceStr.Contains(ch.ToString()))                 
                 {
                     // if the index in the i_CompareTo's sequence is the same as the current letter's
-                    if (currentIndex == i_CompareTo.m_SequenceStr.IndexOf(ch))
+                    if (currentIndex == i_CompareTo.m_SequenceStr.IndexOf(ch))         
                     {
                         o_NumOfCorrectGuesses++;
                     }
