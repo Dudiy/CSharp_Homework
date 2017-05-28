@@ -22,6 +22,7 @@ namespace B17_Ex02
             m_Sequence = new LetterSequence(i_SequenceStr);
         }
 
+        // ==================================================== Getters Setters ====================================================
         public string SequenceStr
         {
             get { return m_Sequence.SequenceStr; }
@@ -42,6 +43,7 @@ namespace B17_Ex02
             get { return m_IsWinningRound; }
         }
 
+        // ==================================================== Methods ====================================================
         public void PlayRound(LetterSequence i_ComputerSequence)
         {
             m_Sequence.Compare(i_ComputerSequence, out m_NumOfCorrectGuesses, out m_NumOfCorrectLettersInWrongPositions);

@@ -14,14 +14,6 @@ namespace B17_Ex02
 {
     public class GameLogic
     {
-        public enum eGameState
-        {
-            Running,
-            PlayerWon,
-            PlayerLost,
-            GameEnded
-        }
-
         private const byte k_MinNumOfGuesses = 4;
         private const byte k_MaxNumOfGuesses = 10;
         private List<Round> m_RoundsPlayed = new List<Round>();
@@ -35,7 +27,7 @@ namespace B17_Ex02
             m_MaxNumOfGuessesFromPlayer = i_MaxNumOfGuessesFromPlayer;
         }
 
-        // ==========================Getters Setters=======================
+        // ==================================================== Getters Setters ====================================================
         public static byte MinNumOfGuesses
         {
             get { return k_MinNumOfGuesses; }
@@ -86,7 +78,8 @@ namespace B17_Ex02
             return m_RoundsPlayed[i_RoundInd].NumOfCorrectLetterInWrongPositions;
         }
 
-        // get input from user and update the current Round
+        // ==================================================== Methods ====================================================
+        // gets user input from the UI and update the current Round
         public void PlayRound(string i_UserInput)
         {
             Round currentRound = new Round(i_UserInput);

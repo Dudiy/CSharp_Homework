@@ -16,8 +16,8 @@ namespace B17_Ex02
 {
     public class ConsoleUI
     {
-        private GameLogic m_CurrentGame = null;
         private readonly byte r_MaxWordLenWithSpaces = (byte)((2 * LetterSequence.LengthOfSequence) - 1);
+        private GameLogic m_CurrentGame = null;
 
         // ================================================ getting input from user ================================================
         private byte getMaxNumOfGuessesFromUser()
@@ -37,14 +37,12 @@ GameLogic.MaxNumOfGuesses);
                 if (!(inputIsByte = byte.TryParse(userInputStr, out userInputByte)))
                 {
                     Console.WriteLine(
-@"Invalid input, please try again.
-");
+@"Invalid input, please try again.");
                 }
                 else if (!GameLogic.IsValidNumOfGuesses(userInputByte))
                 {
                     Console.WriteLine(
-@"The number is out of range, please input a number between 4 and 10.
-");
+@"The number is out of range, please input a number between 4 and 10.");
                 }
                 else
                 {
@@ -241,13 +239,13 @@ LetterSequence.MaxLetterInSequence);
             return outputStr.ToString();
         }
 
-        // ================================================ IO<->Game methods ================================================
+        // ==================================================== IO<->Game methods ====================================================
         public void StartNewGame()
         {
             Ex02.ConsoleUtils.Screen.Clear();
             m_CurrentGame = new GameLogic(getMaxNumOfGuessesFromUser());
             printBoard();
-            while (m_CurrentGame.GameState.Equals(GameLogic.eGameState.Running))
+            while (m_CurrentGame.GameState.Equals(eGameState.Running))
             {
                 run();
             }
@@ -255,20 +253,20 @@ LetterSequence.MaxLetterInSequence);
 
         private void run()
         {
-            while (m_CurrentGame.GameState.Equals(GameLogic.eGameState.Running))
+            while (m_CurrentGame.GameState.Equals(eGameState.Running))
             {
                 playRound();
             }
 
             switch (m_CurrentGame.GameState)
             {
-                case GameLogic.eGameState.PlayerWon:
+                case eGameState.PlayerWon:
                     winGame();
                     break;
-                case GameLogic.eGameState.PlayerLost:
+                case eGameState.PlayerLost:
                     loseGame();
                     break;
-                case GameLogic.eGameState.GameEnded:
+                case eGameState.GameEnded:
                     endGame();
                     break;
                 default:

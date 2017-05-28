@@ -20,6 +20,7 @@ namespace B17_Ex02
         private static Random s_Randomizer = new Random();
         private string m_SequenceStr = string.Empty;
 
+        // empty ctor - generates a random letter sequence
         public LetterSequence()
         {
             char currentRandomChar = (char)s_Randomizer.Next('A', k_MaxLetterInSequence);
@@ -34,7 +35,14 @@ namespace B17_Ex02
                 m_SequenceStr = string.Concat(m_SequenceStr, currentRandomChar);
             }
         }
+        
+        // ctor that gets a valid sequence of letters and creates a LetterSequence object accordingly
+        public LetterSequence(string i_SequenceStr)
+        {
+            m_SequenceStr = i_SequenceStr;
+        }
 
+        // ==================================================== Getters Setters ====================================================
         // asumption - given sequence is a valid sequence, with no spaces and all uppercase letters
         public static byte LengthOfSequence
         {
@@ -46,21 +54,20 @@ namespace B17_Ex02
             get { return k_MaxLetterInSequence; }
         }
 
-        public LetterSequence(string i_SequenceStr)
-        {
-            m_SequenceStr = i_SequenceStr;
-        }
-
         public string SequenceStr
         {
             get { return m_SequenceStr; }
         }
 
-        // checks if a given string is a valid sequence. 
-        // assumption: given string is already "k_LengthOfSequence" long, has no spaces, and is all uppercase letters
+        // ==================================================== Methods ====================================================
+        /* 
+         * checks if a given string is a valid sequence. 
+         * valid sequence = sequence of upper or lower case letters between 'A' and "k_MaxLetterInSequence".
+         * assumption: given string is already "k_LengthOfSequence" long, 
+         * has no spaces, and is all uppercase letters 
+         */
         public static bool IsValidSequence(string i_SequenceStr)
         {
-            // valid = sequence of upper or lower case letters between 'A' and "k_MaxLetterInSequence"
             bool isValid = true;
 
             // check letters of sequence
@@ -76,6 +83,12 @@ namespace B17_Ex02
             return isValid;
         }
 
+        /*
+         * Method that compares two LetterSequence objects by m_SequenceStr.
+         * out parameters:
+         *  - o_NumOfCorrectGuesses = the number of letters that are equivalent in both strings
+         *  - o_CorrectLettersInWrongPositions = the number of letters that are the same but not at the same index        
+         */
         public void Compare(LetterSequence i_CompareTo, out byte o_NumOfCorrectGuesses, out byte o_CorrectLettersInWrongPositions)
         {
             StringBuilder result = new StringBuilder();

@@ -36,6 +36,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="eGameState.cs" />
     <Compile Include="GameLogic.cs" />
     <Compile Include="LetterSequence.cs" />
     <Compile Include="Program.cs" />
