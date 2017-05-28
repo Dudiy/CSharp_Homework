@@ -6,5 +6,5 @@ Delivery Date.........: 28 - May - 2017
 Delivered In Delay....: No
 Delay Reason..........: 
 Visual Studio Version.: 2017
-Comments..............: None
+Comments..............: Second submission without stylecop files, in case the first one was blocked
 =======================End Exercise Checking Report=========================
